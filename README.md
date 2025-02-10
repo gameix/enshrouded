@@ -29,7 +29,7 @@ Enshrouded Gameserver
     docker rm -f ${repo}-gameserver
 
     # Remove current devloping image
-    docker rmi -f ${repo}-gameserver:0.1.0
+    docker rmi -f gameix-enshrouded-gameserver:0.1.0
     
     # Remove all old docker images etc.
     docker system prune -af --volumes
@@ -42,7 +42,7 @@ Enshrouded Gameserver
     cd /opt
     
     # Show logs
-    docker logs -f ${repo}-gameserver
+    docker logs -f gameix-enshrouded-gameserver
 
 
 ### Run (without docker-compose)
