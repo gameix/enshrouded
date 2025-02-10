@@ -8,7 +8,7 @@ services:
       - "15637:15637/udp"
     environment:
       - SERVER_NAME=GAMEIX Enshrouded Server
-      - SERVER_PASSWORD=PleaseChangeMe
+      - SERVER_PASSWORD=WuppiDuppi12!
       - GAME_PORT=15636
       - QUERY_PORT=15637
       - SERVER_SLOTS=16
