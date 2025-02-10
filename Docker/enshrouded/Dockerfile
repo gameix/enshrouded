@@ -24,9 +24,8 @@ RUN apt-get install -y cabextract winbind screen xvfb
 RUN add-apt-repository multiverse
 
 
-
-
-#RUN apt-get install -y
+# Install Steam
+RUN apt-get install -y steamcmd
 
 
 # Clean up
