@@ -23,7 +23,6 @@ RUN apt-get install -y cabextract winbind screen xvfb
 ## Add the multiverse repository to our Ubuntu device
 RUN add-apt-repository multiverse
 
-
 # Install Steam
 ## Add automatically License aggreement
 RUN echo steam steam/question select "I AGREE" | debconf-set-selections
@@ -31,15 +30,12 @@ RUN echo steam steam/license note '' | debconf-set-selections
 ## Install steamcmd
 RUN apt-get install -y steamcmd
 
-
 # Install Enshrouded Dedicated Server
 ## Add User
 RUN useradd -m enshrouded
 #RUN sudo -u enshrouded -s
 ## Install Server
 RUN /usr/games/steamcmd +@sSteamCmdForcePlatformType windows +force_install_dir /home/enshrouded/enshroudedserver +login anonymous +app_update 2278520 +quit
-
-
 
 
 # Clean up

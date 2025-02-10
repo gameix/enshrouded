@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# Run STEAM ENSHROUDED DEDICATED SERVER
+function enshrouded_dedicated_server() {
+  echo "ENSHROUDED: Start Dedicated Server"
+  wine64 ~/enshroudedserver/enshrouded_server.exe
+
+
+
+}
+
+
 # Keep Container running
 function keepContainerRunning () {
   # Keep Alive

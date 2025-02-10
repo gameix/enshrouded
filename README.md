@@ -41,3 +41,8 @@ Enshrouded gameserver
     # Show logs
     docker logs -f ${repo}-gameserver
 
+
+
+### INFO
+* Size of Docker image ~ 9GB
+* 
