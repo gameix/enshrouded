@@ -32,6 +32,4 @@ services:
     image: enshrouded-gameserver:0.1.0
     container_name: enshrouded-gameserver
     privileged: false
-    ports:
-    environment:
-    volumes:
+
