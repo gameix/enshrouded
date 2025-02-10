@@ -35,7 +35,7 @@ RUN apt-get install -y steamcmd
 # Install Enshrouded Dedicated Server
 ## Add User
 RUN useradd -m enshrouded
-RUN -u enshrouded -s
+RUN sudo -u enshrouded -s
 
 
 
