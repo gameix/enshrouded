@@ -21,13 +21,7 @@
 #   Solution: docker system prune -af --volumes
 ############################################################################################################
 services:
-  base:
-    build: /opt/enshrouded/Docker/base/
-    image: enshrouded-base:0.1.0
-    container_name: enshrouded-base
   gameserver:
-    depends_on:
-      - base
     build: /opt/enshrouded/Docker/enshrouded/
     container_name: enshrouded-gameserver
     image: enshrouded-gameserver:0.1.0
