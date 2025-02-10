@@ -36,7 +36,7 @@ if [ -z "$GAME_PORT" ]; then
     GAME_PORT='15636'
     echo "[$(timestamp)] --  WARN: GAME_PORT Variable not set, using default: '15636'"
   else
-    echo "[$(timestamp)] -- INFO: GAME_PORT Variable is set: ${GAME_PORT}"
+    echo "[$(timestamp)] --  INFO: GAME_PORT Variable is set: ${GAME_PORT}"
 fi
 
 if [ -z "$QUERY_PORT" ]; then
