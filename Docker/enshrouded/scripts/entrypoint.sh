@@ -20,14 +20,14 @@ trap 'shutdown' TERM
 
 # Validate arguments
 if [ -z "$SERVER_NAME" ]; then
-    SERVER_NAME='Enshrouded Containerized'
-    echo "$(timestamp) WARN: SERVER_NAME Variable not set, using default: Enshrouded Containerized"
+    SERVER_NAME='GAMEIX.NET Enshrouded Containerized'
+    echo "$(timestamp) WARN: SERVER_NAME Variable not set, using default: GAMEIX.NET Enshrouded Containerized"
   else
     echo "$(timestamp) INFO: SERVER_NAME Variable is set: ${SERVER_NAME}"
 fi
 
 if [ -z "$SERVER_PASSWORD" ]; then
-    echo "$(timestamp) WARN: SERVER_PASSWORD Variable not set, server will be open to the public"
+    echo "$(timestamp) WARN: SERVER_PASSWORD Variable not set, server will be open to the public!"
   else
     echo "$(timestamp) INFO: SERVER_PASSWORD Variable is set: ${SERVER_PASSWORD}"
 fi
