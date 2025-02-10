@@ -4,9 +4,12 @@
 # Base image
 FROM enshrouded-base:0.1.0
 
-# Install Tools
-RUN apt-get install -y --no-install-recommends etcd-client etcd-server
-# remove apt-get etc and not needed tools and commands -> Security
+# Install Required Packages
+RUN apt-get install -y software-properties-common lsb-release wget
+
+# Install Wine Installation
+#RUN apt-get install -y
+
 
 # Clean up
 RUN apt-get autoremove -y && apt-get clean -y
