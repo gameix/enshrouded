@@ -28,6 +28,7 @@ services:
   gameserver:
     depends_on:
       - base
+    build: /opt/enshrouded/Docker/enshrouded/
     container_name: enshrouded-gameserver
     image: enshrouded-gameserver:0.1.0
     ports:
