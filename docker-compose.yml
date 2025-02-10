@@ -20,16 +20,26 @@
 #   Messages during build -> At least one invalid signature was encountered.
 #   Solution: docker system prune -af --volumes
 ############################################################################################################
+version: '3'
 services:
   base:
     build: /opt/enshrouded/Docker/base/
     image: enshrouded-base:0.1.0
     container_name: enshrouded-base
-  gameserver:
-    depends_on:
-      - base
-    build: /opt/enshrouded/Docker/enshrouded/
+  enshrouded:
     image: enshrouded-gameserver:0.1.0
-    container_name: enshrouded-gameserver
-    privileged: false
+    ports:
+      - "15636:15636/udp"
+      - "15637:15637/udp"
+    environment:
+      - SERVER_NAME=Enshrouded Containerized
+      - SERVER_PASSWORD=PleaseChangeMe
+      - GAME_PORT=15636
+      - QUERY_PORT=15637
+      - SERVER_SLOTS=16
+      - SERVER_IP=0.0.0.0
+    volumes:
+      - enshrouded-persistent-data:/home/steam/enshrouded/savegame
 
+volumes:
+  enshrouded-persistent-data:
