@@ -21,7 +21,7 @@ trap 'shutdown' TERM
 # Validate arguments
 if [ -z "$SERVER_NAME" ]; then
     SERVER_NAME='GAMEIX.NET Enshrouded Containerized'
-    echo "$(timestamp) WARN: SERVER_NAME Variable not set, using default: GAMEIX.NET Enshrouded Containerized"
+    echo "$(timestamp) WARN: SERVER_NAME Variable not set, using default: 'GAMEIX.NET Enshrouded Containerized'"
   else
     echo "$(timestamp) INFO: SERVER_NAME Variable is set: ${SERVER_NAME}"
 fi
@@ -34,35 +34,35 @@ fi
 
 if [ -z "$GAME_PORT" ]; then
     GAME_PORT='15636'
-    echo "$(timestamp) WARN: GAME_PORT Variable not set, using default: 15636"
+    echo "$(timestamp) WARN: GAME_PORT Variable not set, using default: '15636'"
   else
     echo "$(timestamp) INFO: GAME_PORT Variable is set: ${GAME_PORT}"
 fi
 
 if [ -z "$QUERY_PORT" ]; then
     QUERY_PORT='15637'
-    echo "$(timestamp) WARN: QUERY_PORT Variable not set, using default: 15637"
+    echo "$(timestamp) WARN: QUERY_PORT Variable not set, using default: '15637'"
   else
     echo "$(timestamp) INFO: QUERY_PORT Variable is set: ${QUERY_PORT}"
 fi
 
 if [ -z "$SERVER_SLOTS" ]; then
     SERVER_SLOTS='16'
-    echo "$(timestamp) WARN: SERVER_SLOTS Variable not set, using default: 16"
+    echo "$(timestamp) WARN: SERVER_SLOTS Variable not set, using default: '16'"
   else
     echo "$(timestamp) INFO: SERVER_SLOTS Variable is set: '${SERVER_SLOTS}'"
 fi
 
 if [ -z "$SERVER_IP" ]; then
     SERVER_IP='0.0.0.0'
-    echo "$(timestamp) WARN: SERVER_IP Variable not set, using default: 0.0.0.0"
+    echo "$(timestamp) WARN: SERVER_IP Variable not set, using default: '0.0.0.0'"
   else
     echo "$(timestamp) INFO: SERVER_IP Variable is set: '${SERVER_IP}'"
 fi
 
 if [ -z "$ENABLE_CHAT" ]; then
     ENABLE_CHAT='true'
-    echo "$(timestamp) WARN: ENABLE_CHAT Variable not set, using default: true"
+    echo "$(timestamp) WARN: ENABLE_CHAT Variable not set, using default: 'true'"
   else
     echo "$(timestamp) INFO: ENABLE_CHAT Variable is set: '${ENABLE_CHAT}'"
 fi
