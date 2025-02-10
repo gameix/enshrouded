@@ -3,12 +3,24 @@
 # ====================================================================================================================
 
 # Base image
-FROM enshrouded-base:0.1.0
+FROM ubuntu:noble
+
+# Define
+ENV TZ=UTC
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Setup Timezone
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# Update & Upgrade
+RUN apt-get update && apt-get upgrade -y && apt-get autoremove -y && apt-get clean -y
+
+# ====================================================================================================================
+
 
 ARG CONTAINER_GID=10000
 ARG CONTAINER_UID=10000
 
-ENV DEBIAN_FRONTEND="noninteractive"
 ENV STEAM_APP_ID="2278520"
 ENV HOME="/home/steam"
 ENV ENSHROUDED_PATH="/home/steam/enshrouded"

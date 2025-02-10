@@ -43,9 +43,17 @@ Enshrouded Gameserver
     docker logs -f ${repo}-gameserver
 
 
-
 ### INFO
-* Size of Docker image ~ 9GB
+* Size of Docker image ~ 2GB
+* Size min. Disk (gameserver data etc.) ~ 6GB
+
+
+#### Show detailed disk usage of root
+    du -cha --max-depth=1 / | grep -E "M|G"
+
+#### Show detailed disk usage subdirs
+    du -bsh *
+
 
 
 
