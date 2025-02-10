@@ -28,12 +28,12 @@ Enshrouded gameserver
     # Remove existing all containers
     docker rm -f ${repo}-gameserver
 
+    # Remove current devloping image
+    docker rmi -f ${repo}-gameserver:0.1.0
+    
     # Remove all old docker images etc.
     docker system prune -af --volumes
     
-    # Remove current devloping image
-    docker rmi -f ${repo}-gameserver:0.1.0
-
     # Build & Deploy 
     docker-compose up -d
     cd /opt

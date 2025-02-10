@@ -12,3 +12,7 @@ function keepContainerRunning () {
   done
 }
 
+#########################################################
+#
+# Execute
+keepContainerRunning
