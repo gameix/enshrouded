@@ -46,6 +46,13 @@ RUN groupadd -g $CONTAINER_GID steam \
     && apt-get clean \
     && apt-get autoremove -y
 
+# Copy Enrtypoint
+COPY scripts/entrypoint.sh /home/steam/entrypoint.sh
+# Set permission
+RUN chmod +x /home/steam/entrypoint.sh
+
+
+
 USER steam
 
 RUN mkdir "$ENSHROUDED_PATH" \
@@ -62,14 +69,9 @@ RUN mkdir "$ENSHROUDED_PATH" \
     && ln -s ${STEAM_SDK32_PATH}/steamclient.so ${STEAM_SDK32_PATH}/steamservice.so \
     && curl -sqL "$GE_PROTON_URL" | tar zxvf - -C "${STEAMCMD_PATH}/compatibilitytools.d/"
 
-# Copy Enrtypoint
-COPY scripts/entrypoint.sh /home/steam/entrypoint.sh
 
 # Copy enshreouded config file
 COPY config/enshrouded_server_example.json /home/steam/enshrouded_server_example.json
-
-# Set permission
-RUN chmod +x /home/steam/entrypoint.sh
 
 WORKDIR /home/steam
 
