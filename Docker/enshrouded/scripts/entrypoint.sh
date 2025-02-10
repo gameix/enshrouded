@@ -21,66 +21,66 @@ trap 'shutdown' TERM
 # Validate arguments
 if [ -z "$SERVER_NAME" ]; then
     SERVER_NAME='GAMEIX.NET Enshrouded Containerized'
-    echo "$(timestamp) WARN: SERVER_NAME Variable not set, using default: 'GAMEIX.NET Enshrouded Containerized'"
+    echo "[$(timestamp)] -- WARN: SERVER_NAME Variable not set, using default: 'GAMEIX.NET Enshrouded Containerized'"
   else
-    echo "$(timestamp) INFO: SERVER_NAME Variable is set: ${SERVER_NAME}"
+    echo "[$(timestamp)] --  INFO: SERVER_NAME Variable is set: ${SERVER_NAME}"
 fi
 
 if [ -z "$SERVER_PASSWORD" ]; then
-    echo "$(timestamp) WARN: SERVER_PASSWORD Variable not set, server will be open to the public!"
+    echo "[$(timestamp)] --  WARN: SERVER_PASSWORD Variable not set, server will be open to the public!"
   else
-    echo "$(timestamp) INFO: SERVER_PASSWORD Variable is set: ${SERVER_PASSWORD}"
+    echo "[$(timestamp)] --  INFO: SERVER_PASSWORD Variable is set: ${SERVER_PASSWORD}"
 fi
 
 if [ -z "$GAME_PORT" ]; then
     GAME_PORT='15636'
-    echo "$(timestamp) WARN: GAME_PORT Variable not set, using default: '15636'"
+    echo "[$(timestamp)] --  WARN: GAME_PORT Variable not set, using default: '15636'"
   else
-    echo "$(timestamp) INFO: GAME_PORT Variable is set: ${GAME_PORT}"
+    echo "[$(timestamp)] -- INFO: GAME_PORT Variable is set: ${GAME_PORT}"
 fi
 
 if [ -z "$QUERY_PORT" ]; then
     QUERY_PORT='15637'
-    echo "$(timestamp) WARN: QUERY_PORT Variable not set, using default: '15637'"
+    echo "[$(timestamp)] --  WARN: QUERY_PORT Variable not set, using default: '15637'"
   else
-    echo "$(timestamp) INFO: QUERY_PORT Variable is set: ${QUERY_PORT}"
+    echo "[$(timestamp)] --  INFO: QUERY_PORT Variable is set: ${QUERY_PORT}"
 fi
 
 if [ -z "$SERVER_SLOTS" ]; then
     SERVER_SLOTS='16'
-    echo "$(timestamp) WARN: SERVER_SLOTS Variable not set, using default: '16'"
+    echo "[$(timestamp)] --  WARN: SERVER_SLOTS Variable not set, using default: '16'"
   else
-    echo "$(timestamp) INFO: SERVER_SLOTS Variable is set: '${SERVER_SLOTS}'"
+    echo "[$(timestamp)] --  INFO: SERVER_SLOTS Variable is set: '${SERVER_SLOTS}'"
 fi
 
 if [ -z "$SERVER_IP" ]; then
     SERVER_IP='0.0.0.0'
-    echo "$(timestamp) WARN: SERVER_IP Variable not set, using default: '0.0.0.0'"
+    echo "[$(timestamp)] --  WARN: SERVER_IP Variable not set, using default: '0.0.0.0'"
   else
-    echo "$(timestamp) INFO: SERVER_IP Variable is set: '${SERVER_IP}'"
+    echo "[$(timestamp)] --  INFO: SERVER_IP Variable is set: '${SERVER_IP}'"
 fi
 
 if [ -z "$ENABLE_CHAT" ]; then
     ENABLE_CHAT='true'
-    echo "$(timestamp) WARN: ENABLE_CHAT Variable not set, using default: 'true'"
+    echo "[$(timestamp)] --  WARN: ENABLE_CHAT Variable not set, using default: 'true'"
   else
-    echo "$(timestamp) INFO: ENABLE_CHAT Variable is set: '${ENABLE_CHAT}'"
+    echo "[$(timestamp)] --  INFO: ENABLE_CHAT Variable is set: '${ENABLE_CHAT}'"
 fi
 
 # Install/Update Enshrouded
-echo "$(timestamp) INFO: Updating Enshrouded Dedicated Server"
+echo "[$(timestamp)] --  INFO: Updating Enshrouded Dedicated Server"
 ${STEAMCMD_PATH}/steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir "$ENSHROUDED_PATH" +login anonymous +app_update ${STEAM_APP_ID} validate +quit
 
 # Check that steamcmd was successful
 if [ $? != 0 ]; then
-    echo "$(timestamp) ERROR: steamcmd was unable to successfully initialize and update Enshrouded"
+    echo "[$(timestamp)] -- ERROR: steamcmd was unable to successfully initialize and update Enshrouded"
     exit 1
 fi
 
 # Copy example server config if not already present
 if [ $EXTERNAL_CONFIG -eq 0 ]; then
     if ! [ -f "${ENSHROUDED_PATH}/enshrouded_server.json" ]; then
-        echo "$(timestamp) INFO: Enshrouded server config not present, copying example"
+        echo "[$(timestamp)] --  INFO: Enshrouded server config not present, copying example"
         cp /home/steam/enshrouded_server_example.json ${ENSHROUDED_PATH}/enshrouded_server.json
     fi
 fi
@@ -88,7 +88,7 @@ fi
 # Check for proper save permissions
 if ! touch "${ENSHROUDED_PATH}/savegame/test"; then
     echo ""
-    echo "$(timestamp) ERROR: The ownership of /home/steam/enshrouded/savegame is not correct and the server will not be able to save..."
+    echo "[$(timestamp)] --  ERROR: The ownership of /home/steam/enshrouded/savegame is not correct and the server will not be able to save..."
     echo "the directory that you are mounting into the container needs to be owned by 10000:10000"
     echo "from your container host attempt the following command 'chown -R 10000:10000 /your/enshrouded/folder'"
     echo ""
@@ -112,7 +112,7 @@ if [ $EXTERNAL_CONFIG -eq 0 ]; then
     #jq --arg c "$ENABLE_CHAT" '.enableTextChat = $c' ${ENSHROUDED_CONFIG} > "$tmpfile" && mv "$tmpfile" $ENSHROUDED_CONFIG
     # -> BUG: jq: error (at /home/steam/enshrouded/enshrouded_server.json:60): string ("true") cannot be parsed as a number
 else
-    echo "$(timestamp) INFO: EXTERNAL_CONFIG set to true, not updating Enshrouded Server configuration"
+    echo "[$(timestamp)] --  INFO: EXTERNAL_CONFIG set to true, not updating Enshrouded Server configuration"
 fi
 
 # Wine talks too much and it's annoying
@@ -132,7 +132,7 @@ fi
 ln -sf /proc/1/fd/1 "${ENSHROUDED_PATH}/logs/enshrouded_server.log"
 
 # Launch Enshrouded
-echo "$(timestamp) INFO: Starting Enshrouded Dedicated Server"
+echo "[$(timestamp)] --  INFO: Starting Enshrouded Dedicated Server"
 
 ${STEAMCMD_PATH}/compatibilitytools.d/GE-Proton${GE_PROTON_VERSION}/proton run ${ENSHROUDED_PATH}/enshrouded_server.exe &
 
@@ -143,12 +143,12 @@ while [ $timeout -lt 11 ]; do
         enshrouded_pid=$(ps -e | grep "enshrouded_serv" | awk '{print $1}')
         break
     elif [ $timeout -eq 10 ]; then
-        echo "$(timestamp) ERROR: Timed out waiting for enshrouded_server.exe to be running"
+        echo "[$(timestamp)] --  ERROR: Timed out waiting for enshrouded_server.exe to be running"
         exit 1
     fi
     sleep 6
     ((timeout++))
-    echo "$(timestamp) INFO: Waiting for enshrouded_server.exe to be running"
+    echo "[$(timestamp)] -- INFO: Waiting for enshrouded_server.exe to be running"
 done
 
 # Hold us open until we recieve a SIGTERM by opening a job waiting for the process to finish then calling `wait`
@@ -162,5 +162,5 @@ if ps -e | grep "enshrouded_serv"; then
 fi
 
 # o7
-echo "$(timestamp) INFO: Shutdown complete."
+echo "[$(timestamp)] --  INFO: Shutdown complete."
 exit 0
