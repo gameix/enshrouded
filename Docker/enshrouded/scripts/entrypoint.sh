@@ -23,5 +23,5 @@ function keepContainerRunning () {
 #########################################################
 #
 # Execute
-keepContainerRunning
+#keepContainerRunning
 enshrouded_dedicated_server
