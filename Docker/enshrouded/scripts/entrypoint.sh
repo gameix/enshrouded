@@ -48,10 +48,10 @@ if [ -z "$SERVER_IP" ]; then
     echo "$(timestamp) WARN: SERVER_IP not set, using default: 0.0.0.0"
 fi
 
-# Show System INFO
-echo "$(timestamp) INFO: Show System Info"
-cd /
-df -h
+if [ -z "$ENABLE_CHAT" ]; then
+    ENABLE_CHAT='true'
+    echo "$(timestamp) WARN: Variable 'ENABLE_CHAT' not set, using default: true"
+fi
 
 # Install/Update Enshrouded
 echo "$(timestamp) INFO: Updating Enshrouded Dedicated Server"
