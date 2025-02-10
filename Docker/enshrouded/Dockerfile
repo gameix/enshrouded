@@ -46,7 +46,7 @@ RUN groupadd -g $CONTAINER_GID steam \
     && apt-get clean \
     && apt-get autoremove -y
 
-# Copy Enrtypoint
+# Copy Entrypoint
 COPY scripts/entrypoint.sh /home/steam/entrypoint.sh
 # Set permission
 RUN chmod +x /home/steam/entrypoint.sh

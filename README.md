@@ -33,7 +33,7 @@ Enshrouded Gameserver
     docker rmi -f ${repo}-gameserver:0.1.0
     
     # Remove all old docker images etc.
-    docker system prune -af --volumes
+    #docker system prune -af --volumes
     
     # Build & Deploy 
     docker-compose up -d

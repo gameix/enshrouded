@@ -48,6 +48,11 @@ if [ -z "$SERVER_IP" ]; then
     echo "$(timestamp) WARN: SERVER_IP not set, using default: 0.0.0.0"
 fi
 
+# Show System INFO
+echo "$(timestamp) INFO: Show System Info"
+cd /
+df -h
+
 # Install/Update Enshrouded
 echo "$(timestamp) INFO: Updating Enshrouded Dedicated Server"
 ${STEAMCMD_PATH}/steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir "$ENSHROUDED_PATH" +login anonymous +app_update ${STEAM_APP_ID} validate +quit
