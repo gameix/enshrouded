@@ -15,7 +15,7 @@ RUN wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-buil
 ## Add Wine Repository
 RUN wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/dists/$(lsb_release -cs)/winehq-$(lsb_release -cs).sources
 ## Update and Install Wine
-RUN apt update && apt-get install -y --install-recommends winehq-staging
+RUN apt-get update && apt-get install -y --install-recommends winehq-staging
 
 #RUN apt-get install -y
 

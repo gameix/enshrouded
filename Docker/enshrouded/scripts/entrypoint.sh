@@ -6,7 +6,7 @@ function keepContainerRunning () {
   while :
   do
     sleeptime=10
-    echo "Keep Container running...Press [CTRL+C], next run in ${sleeptime} seconds";	sleep ${sleeptime}
+    echo "ENSHROUDED: Keep Container running...Press [CTRL+C], next run in ${sleeptime} seconds";	sleep ${sleeptime}
   done
 }
 
