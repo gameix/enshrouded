@@ -2,8 +2,7 @@
 Enshrouded Gameserver
 
 ## Link
-[Setting Up an Enshrouded Dedicated Server on Ubuntu](https://github.com/bonsaibauer/enshrouded_server_ubuntu)
-[Enshrouded Docker](https://github.com/jsknnr/enshrouded-server)
+* [Enshrouded Docker](https://github.com/jsknnr/enshrouded-server)
 
 ### Build & Deployment
 
