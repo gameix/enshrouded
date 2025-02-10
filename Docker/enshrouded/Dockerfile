@@ -18,6 +18,13 @@ RUN wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/$(lsb_re
 RUN dpkg --add-architecture i386
 ## Update and Install Wine
 RUN apt-get update && apt-get install -y --install-recommends winehq-staging
+## We need a few extra packages for Wine to work with the Enshrouded dedicated server on Ubuntu.
+RUN apt-get install -y cabextract winbind screen xvfb
+## Add the multiverse repository to our Ubuntu device
+RUN add-apt-repository multiverse
+
+
+
 
 #RUN apt-get install -y
 
