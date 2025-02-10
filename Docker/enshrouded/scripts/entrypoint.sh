@@ -24,3 +24,4 @@ function keepContainerRunning () {
 #
 # Execute
 keepContainerRunning
+enshrouded_dedicated_server
