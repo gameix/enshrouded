@@ -78,3 +78,6 @@ Enshrouded Gameserver
 #### Show detailed disk usage subdirs
     du -bsh *
 
+## BUGS
+    # Error in entrypoint.sh line 98
+        -> jq: error (at /home/steam/enshrouded/enshrouded_server.json:60): string ("true") cannot be parsed as a number
