@@ -25,6 +25,10 @@ RUN add-apt-repository multiverse
 
 
 # Install Steam
+
+##
+RUN echo steam steam/question select "I AGREE" | debconf-set-selections
+RUN echo steam steam/license note '' | debconf-set-selections
 RUN apt-get install -y steamcmd
 
 
