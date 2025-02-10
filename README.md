@@ -67,7 +67,7 @@ Enshrouded Gameserver
 
 ### Client Connect
 * Via IPv4: <IPv4>:<QueryPost=15637>
-* Via Name: GAMEIX Enshrouded Server
+* Via Name: GAMEIX.NET Enshrouded Server
 
 
 ### INFO
