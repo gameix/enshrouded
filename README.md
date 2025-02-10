@@ -3,6 +3,8 @@ Enshrouded Gameserver
 
 ## Link
 * [Enshrouded Docker](https://github.com/jsknnr/enshrouded-server)
+* [Enable voice and chat:](https://steamcommunity.com/sharedfiles/filedetails/?id=3417090067)
+* [Recommended Server Specifications ](https://enshrouded.zendesk.com/hc/en-us/articles/16055628734109-Recommended-Server-Specifications)
 
 ### Build & Deployment
 
