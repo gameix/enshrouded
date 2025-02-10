@@ -8,6 +8,14 @@ FROM enshrouded-base:0.1.0
 RUN apt-get install -y software-properties-common lsb-release wget
 
 # Install Wine Installation
+## Create Keyring Directory
+RUN mkdir -pm755 /etc/apt/keyrings
+## Download Wine GPG Key
+RUN wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key
+## Add Wine Repository
+RUN wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/dists/$(lsb_release -cs)/winehq-$(lsb_release -cs).sources
+
+
 #RUN apt-get install -y
 
 
