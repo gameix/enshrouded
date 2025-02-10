@@ -6,6 +6,9 @@
   "gamePort": 15636,
   "queryPort": 15637,
   "slotCount": 16,
+  "enableTextChat": true,
+  "enableVoiceChat": true,
+  "voiceChatMode": "Global",
   "gameSettingsPreset": "Default",
   "gameSettings": {
     "playerHealthFactor": 1,
