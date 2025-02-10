@@ -25,11 +25,21 @@ RUN add-apt-repository multiverse
 
 
 # Install Steam
-
-##
+## Add automatically License aggreement
 RUN echo steam steam/question select "I AGREE" | debconf-set-selections
 RUN echo steam steam/license note '' | debconf-set-selections
+## Install steamcmd
 RUN apt-get install -y steamcmd
+
+
+# Install Enshrouded Dedicated Server
+## Add User
+RUN useradd -m enshrouded
+RUN -u enshrouded -s
+
+
+
+
 
 
 # Clean up
