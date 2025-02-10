@@ -26,13 +26,13 @@ Enshrouded gameserver
     git branch -a
 
     # Remove existing all containers
-    docker rm -f ${repo}-base
+    docker rm -f ${repo}-gameserver
 
     # Remove all old docker images etc.
     docker system prune -af --volumes
     
     # Remove current devloping image
-    docker rmi -f ${repo}-base:0.1.0
+    docker rmi -f ${repo}-gameserver:0.1.0
 
     # Build & Deploy 
     docker-compose up -d

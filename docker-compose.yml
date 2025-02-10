@@ -25,7 +25,7 @@ services:
     build: /opt/enshrouded/Docker/base/
     image: enshrouded-base:0.1.0
     container_name: enshrouded-base
-  etcd:
+  gameserver:
     depends_on:
       - base
     build: /opt/enshrouded/Docker/enshrouded/
