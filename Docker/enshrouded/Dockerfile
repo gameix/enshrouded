@@ -62,8 +62,8 @@ RUN mkdir "$ENSHROUDED_PATH" \
     && ln -s ${STEAM_SDK32_PATH}/steamclient.so ${STEAM_SDK32_PATH}/steamservice.so \
     && curl -sqL "$GE_PROTON_URL" | tar zxvf - -C "${STEAMCMD_PATH}/compatibilitytools.d/"
 
-COPY entrypoint.sh /home/steam/entrypoint.sh
-COPY enshrouded_server_example.json /home/steam/enshrouded_server_example.json
+COPY scripts/entrypoint.sh /home/steam/entrypoint.sh
+COPY config/enshrouded_server_example.json /home/steam/enshrouded_server_example.json
 
 WORKDIR /home/steam
 
