@@ -43,22 +43,17 @@ Enshrouded Gameserver
     docker logs -f ${repo}-gameserver
 
 
-### INFO
-* Size of Docker image ~ 2GB
-* Size min. Disk (gameserver data etc.) ~ 6GB
-
-
 ### Run (without docker-compose)
     docker volume create enshrouded-persistent-data
     docker run \
     --detach \
-    --name gameix-enshrouded-server \
-    --mount type=volume,source=enshrouded-persistent-data,target=/home/steam/enshrouded/savegame \
+    --name enshrouded-gameserver \
+    --mount type=volume,source=enshrouded-persistent-data,target=/home/steam \
     --publish 15636:15636/udp \
     --publish 15637:15637/udp \
     --env=SERVER_NAME='GAMEIX Enshrouded Server' \
     --env=SERVER_SLOTS=16 \
-    --env=SERVER_PASSWORD='ChangeThisPlease' \
+    --env=SERVER_PASSWORD='WuppiDuppi12!' \
     --env=GAME_PORT=15636 \
     --env=QUERY_PORT=15637 \
     enshrouded-gameserver:0.1.0
@@ -68,28 +63,15 @@ Enshrouded Gameserver
 * Via IPv4: <IPv4>:<QueryPost=15637>
 * Via Name: GAMEIX Enshrouded Server
 
+
+### INFO
+* Size of Docker image ~ 2GB
+* Size min. Disk (gameserver data etc.) ~ 6GB
+
+
 #### Show detailed disk usage of root
     du -cha --max-depth=1 / | grep -E "M|G"
 
 #### Show detailed disk usage subdirs
     du -bsh *
-
-
-## Use existing Docker image [Enshrouded Docker](https://github.com/jsknnr/enshrouded-server)
-    docker rm -f enshrouded-server 
-    docker volume create enshrouded-persistent-data
-    docker run \
-    --detach \
-    --name enshrouded-server \
-    --mount type=volume,source=enshrouded-persistent-data,target=/home/steam/enshrouded/savegame \
-    --publish 15636:15636/udp \
-    --publish 15637:15637/udp \
-    --env=SERVER_NAME='gameix' \
-    --env=SERVER_SLOTS=16 \
-    --env=SERVER_PASSWORD='WuppiDuppi12!' \
-    --env=GAME_PORT=15636 \
-    --env=QUERY_PORT=15637 \
-    sknnr/enshrouded-dedicated-server:latest
-    # show logs
-    docker logs -f enshrouded-server
 

@@ -7,7 +7,7 @@ services:
       - "15636:15636/udp"
       - "15637:15637/udp"
     environment:
-      - SERVER_NAME=Enshrouded Containerized
+      - SERVER_NAME=GAMEIX Enshrouded Server
       - SERVER_PASSWORD=PleaseChangeMe
       - GAME_PORT=15636
       - QUERY_PORT=15637
