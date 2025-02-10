@@ -22,7 +22,7 @@ Enshrouded gameserver
     git clone https://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@github.com/gameix/${repo}.git
     cd /opt/${repo}
     # Checkout Branch
-    git checkout main
+    git checkout create-docker-image
     git branch -a
 
     # Remove existing all containers
