@@ -26,7 +26,7 @@ Enshrouded Gameserver
     git branch -a
 
     # Remove existing all containers
-    docker rm -f ${repo}-gameserver
+    docker rm -f gameix-enshrouded-gameserver
 
     # Remove current devloping image
     docker rmi -f gameix-enshrouded-gameserver:0.1.0
@@ -36,7 +36,8 @@ Enshrouded Gameserver
 
     # Remove existing volume
     docker volume rm -f gameix-enshrouded-persistent-data
-    
+    sync
+
     # Build & Deploy 
     docker-compose up -d
     cd /opt
