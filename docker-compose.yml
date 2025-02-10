@@ -13,6 +13,7 @@ services:
       - QUERY_PORT=15637
       - SERVER_SLOTS=16
       - SERVER_IP=0.0.0.0
+      - ENABLE_CHAT=true
     volumes:
       - gameix-enshrouded-persistent-data:/home/steam
       - gameix-enshrouded-persistent-savegame:/home/steam/enshrouded/savegame
