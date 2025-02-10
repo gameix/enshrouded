@@ -35,9 +35,9 @@ RUN apt-get install -y steamcmd
 # Install Enshrouded Dedicated Server
 ## Add User
 RUN useradd -m enshrouded
-RUN sudo -u enshrouded -s
-
-
+#RUN sudo -u enshrouded -s
+## Install Server
+RUN /usr/games/steamcmd +@sSteamCmdForcePlatformType windows +force_install_dir /home/enshrouded/enshroudedserver +login anonymous +app_update 2278520 +quit
 
 
 
