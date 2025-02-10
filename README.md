@@ -79,8 +79,8 @@ Enshrouded Gameserver
 #### Backup
     # create a backup location
     BACKUP_PATH="/opt/enshrouded_backup"
-    # copy world data to a save location
     mkdir -p ${BACKUP_PATH}
+    # copy world data to a save location
     cp -a /var/lib/docker/volumes/enshrouded_gameix-enshrouded-persistent-savegame/_data/* ${BACKUP_PATH}/
 #### Restore
     # create a backup location
