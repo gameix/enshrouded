@@ -1,25 +1,3 @@
-############################################################################################################
-# INFO:
-#   A ".env" File is needed for use VARIABLES in compose file !!!
-#   Run the script "create_env.sh" before run docker-compose up -d
-# USAGE:
-#   Only Build images:
-#     cd /opt/filesyc && docker-compose build  --no-cache --progress=plain
-#   Build and Run:
-#     cd /opt/filesyc && docker-compose up -d
-#   Build and Run with generic variables:
-#     cd /opt/filesyc && export ETCD_CLUSTER_MEMBER_NAME=$(hostname -f); export HOST_IPV4_ADDRESS=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1' |grep -v '172.*'); docker-compose up -d
-#   Build and Run with created generic env file:
-#     cd /opt/filesyc
-#     echo ETCD_CLUSTER_MEMBER_NAME=$(hostname -f) > .env
-#     echo HOST_IPV4_ADDRESS=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1' |grep -v '172.*') >> .env
-#     echo ETCD_TOKEN='WQLAKDJ(UEIJSID!_u' >> .env
-#     echo ETCD_CLUSTER_MEMBERS="dev.your-server.de=http://188.40.126.76:2380,email1.gameix.net=http://188.40.126.79:2380,email.gameix.net=http://195.201.119.138:2380" >> .env
-#     docker-compose up -d
-# ERRORS:
-#   Messages during build -> At least one invalid signature was encountered.
-#   Solution: docker system prune -af --volumes
-############################################################################################################
 services:
   gameserver:
     build: /opt/enshrouded/Docker/enshrouded/
