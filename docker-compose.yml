@@ -14,7 +14,7 @@ services:
       - SERVER_SLOTS=16
       - SERVER_IP=0.0.0.0
     volumes:
-      - enshrouded-persistent-data:/home/steam/enshrouded/savegame
+      - enshrouded-persistent-data:/home/steam
 
 volumes:
   enshrouded-persistent-data:
