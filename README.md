@@ -75,6 +75,19 @@ Enshrouded Gameserver
 * Size min. Disk (gameserver data etc.) ~ 6GB
 
 
+### Backup & Restore (World Data)
+#### Backup
+    # create a backup location
+    BACKUP_PATH="/opt/enshrouded_backup"
+    # copy world data to a save location
+    mkdir -p ${BACKUP_PATH}
+    cp -a /var/lib/docker/volumes/enshrouded_gameix-enshrouded-persistent-savegame/_data/* ${BACKUP_PATH}/
+#### Restore
+    # create a backup location
+    BACKUP_PATH="/opt/enshrouded_backup"
+    # copy world data to worl path
+    cp -a ${BACKUP_PATH}/* /var/lib/docker/volumes/enshrouded_gameix-enshrouded-persistent-savegame/_data/
+
 #### Show detailed disk usage of root
     du -cha --max-depth=1 / | grep -E "M|G"
 
