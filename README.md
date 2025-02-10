@@ -33,6 +33,9 @@ Enshrouded Gameserver
     
     # Remove all old docker images etc.
     docker system prune -af --volumes
+
+    # Remove existing volume
+    docker volume rm -f enshrouded-persistent-data
     
     # Build & Deploy 
     docker-compose up -d
