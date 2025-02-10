@@ -17,6 +17,7 @@ Enshrouded Gameserver
 #### Build All Images & Deploy
     # Clone git repo
     repo="enshrouded"
+    version="0.1.0"
     cd /opt
     rm -rf /opt/${repo}
     git clone https://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@github.com/gameix/${repo}.git
@@ -29,7 +30,7 @@ Enshrouded Gameserver
     docker rm -f gameix-enshrouded-gameserver
 
     # Remove current devloping image
-    docker rmi -f gameix-enshrouded-gameserver:0.1.0
+    docker rmi -f gameix-enshrouded-gameserver:${version}
     
     # Remove all old docker images etc.
     docker system prune -af --volumes
