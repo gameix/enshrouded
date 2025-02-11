@@ -1,6 +1,6 @@
 # must be ended with a new line "LF" (Unix) and not "CRLF" (Windows)
-*/1 * * * * echo "Hello world i am '$(whoami)' at '$(date)' each 1 minutes hour" >> /tmp/cron.log 2>&1
-*/2 * * * * echo "Hello world i am '$(whoami)'at '$(date)' each 2 minutes hour" >> /tmp/cron.log 2>&1
-*/5 * * * * echo "Hello world i am '$(whoami)' at '$(date)' each 5 minutes hour" >> /tmp/cron.log 2>&1
-0 * * * * echo "Hello world i am '$(whoami)' at '$(date)' each hour" >> /tmp/cron.log 2>&1
+*/1 * * * * echo "Hello world i am '$(whoami)' at '$(date)' each 1 minutes hour" >> /home/steam/enshrouded/backup/cron.log 2>&1
+*/2 * * * * echo "Hello world i am '$(whoami)'at '$(date)' each 2 minutes hour" >> /home/steam/enshrouded/backup/cron.log 2>&1
+*/5 * * * * echo "Hello world i am '$(whoami)' at '$(date)' each 5 minutes hour" >> /home/steam/enshrouded/backup/cron.log 2>&1
+0 * * * * echo "Hello world i am '$(whoami)' at '$(date)' each hour" >> /home/steam/enshrouded/backup/cron.log 2>&1
 # An empty line is required at the end of this file for a valid cron file.

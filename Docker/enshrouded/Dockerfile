@@ -66,6 +66,7 @@ COPY scripts/entrypoint.sh /home/steam/entrypoint.sh
 RUN chmod +x /home/steam/entrypoint.sh
 
 
+
 # BACKUP FEATURE
 ## Copy enshouded-cron file to the cron.d directory
 COPY config/enshouded-cron /etc/cron.d/enshouded-cron
