@@ -134,3 +134,11 @@ Enshrouded Gameserver
 ## BUGS
     # Error in entrypoint.sh line 98
         -> jq: error (at /home/steam/enshrouded/enshrouded_server.json:60): string ("true") cannot be parsed as a number
+
+
+# The Virtualbox Appliance
+    Idea: 
+    ich hoste den gameserver auf meinem PC (da super CPU und 1gbit up link) in einer virtual VM (eine appliance, kann auch für VMWAre oder anderne Hypervisors) wo linux und der gameserver läuft wo sich die läute dann connecten können.
+    Eine einfache lösung um schnell den gameserver von hetzer zb. welcher immer läuft aber nur mit wenigern spielern. Und keinen Hoster verwenden zu müssen.
+    Man könnte auch filesyc in spiel nehmen um z.b. die dataen auf den main gamerserver immer abzugleichen (world speicher stände)....
+
