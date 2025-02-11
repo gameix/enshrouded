@@ -86,7 +86,7 @@ fi
 echo "+---------------------------------------------------------------------------------------------------------------"
 
 # Install/Update Enshrouded
-echo "[$(timestamp)] --  INFO: Updating Enshrouded Dedicated Server"
+echo "[$(timestamp)] -- INFO: Updating Enshrouded Dedicated Server"
 ${STEAMCMD_PATH}/steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir "$ENSHROUDED_PATH" +login anonymous +app_update ${STEAM_APP_ID} validate +quit
 
 # Check that steamcmd was successful
@@ -98,7 +98,7 @@ fi
 # Copy example server config if not already present
 if [ $EXTERNAL_CONFIG -eq 0 ]; then
     if ! [ -f "${ENSHROUDED_PATH}/enshrouded_server.json" ]; then
-        echo "[$(timestamp)] --  INFO: Enshrouded server config not present, copying example"
+        echo "[$(timestamp)] -- INFO: Enshrouded server config not present, copying example"
         cp /home/steam/enshrouded_server_example.json ${ENSHROUDED_PATH}/enshrouded_server.json
     fi
 fi
@@ -106,7 +106,7 @@ fi
 # Check for proper save permissions
 if ! touch "${ENSHROUDED_PATH}/savegame/test"; then
     echo ""
-    echo "[$(timestamp)] --  ERROR: The ownership of /home/steam/enshrouded/savegame is not correct and the server will not be able to save..."
+    echo "[$(timestamp)] -- ERROR: The ownership of /home/steam/enshrouded/savegame is not correct and the server will not be able to save..."
     echo "the directory that you are mounting into the container needs to be owned by 10000:10000"
     echo "from your container host attempt the following command 'chown -R 10000:10000 /your/enshrouded/folder'"
     echo ""
@@ -117,7 +117,7 @@ rm "${ENSHROUDED_PATH}/savegame/test"
 
 # Modify server config to match our arguments
 if [ $EXTERNAL_CONFIG -eq 0 ]; then
-    echo "$(timestamp) INFO: Updating Enshrouded Server configuration"
+    echo "[$(timestamp)] -- INFO: Updating Enshrouded Server configuration"
     tmpfile=$(mktemp)
     jq --arg n "$SERVER_NAME" '.name = $n' ${ENSHROUDED_CONFIG} > "$tmpfile" && mv "$tmpfile" $ENSHROUDED_CONFIG
     if [ -n "$SERVER_PASSWORD" ]; then
@@ -130,7 +130,7 @@ if [ $EXTERNAL_CONFIG -eq 0 ]; then
     #jq --arg c "$ENABLE_CHAT" '.enableTextChat = $c' ${ENSHROUDED_CONFIG} > "$tmpfile" && mv "$tmpfile" $ENSHROUDED_CONFIG
     # -> BUG: jq: error (at /home/steam/enshrouded/enshrouded_server.json:60): string ("true") cannot be parsed as a number
 else
-    echo "[$(timestamp)] --  INFO: EXTERNAL_CONFIG set to true, not updating Enshrouded Server configuration"
+    echo "[$(timestamp)] -- INFO: EXTERNAL_CONFIG set to true, not updating Enshrouded Server configuration"
 fi
 
 # Wine talks too much and it's annoying
@@ -150,7 +150,7 @@ fi
 ln -sf /proc/1/fd/1 "${ENSHROUDED_PATH}/logs/enshrouded_server.log"
 
 # Launch Enshrouded
-echo "[$(timestamp)] --  INFO: Starting Enshrouded Dedicated Server"
+echo "[$(timestamp)] -- INFO: Starting Enshrouded Dedicated Server"
 ${STEAMCMD_PATH}/compatibilitytools.d/GE-Proton${GE_PROTON_VERSION}/proton run ${ENSHROUDED_PATH}/enshrouded_server.exe &
 
 # Find pid for enshrouded_server.exe
@@ -160,7 +160,7 @@ while [ $timeout -lt 11 ]; do
         enshrouded_pid=$(ps -e | grep "enshrouded_serv" | awk '{print $1}')
         break
     elif [ $timeout -eq 10 ]; then
-        echo "[$(timestamp)] --  ERROR: Timed out waiting for enshrouded_server.exe to be running"
+        echo "[$(timestamp)] -- ERROR: Timed out waiting for enshrouded_server.exe to be running"
         exit 1
     fi
     sleep 6
@@ -179,5 +179,5 @@ if ps -e | grep "enshrouded_serv"; then
 fi
 
 # o7
-echo "[$(timestamp)] --  INFO: Shutdown complete."
+echo "[$(timestamp)] -- INFO: Shutdown complete."
 exit 0
