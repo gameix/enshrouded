@@ -76,6 +76,9 @@ RUN chmod 0644 /etc/cron.d/enshouded-cron
 RUN chown $CONTAINER_GID:$CONTAINER_GID /etc/cron.d/enshouded-cron
 # Give the necessary rights to the user to run the cron
 RUN crontab -u steam /etc/cron.d/enshouded-cron && chmod u+s /usr/sbin/cron
+## Copy Backup script
+COPY scripts/backup.sh ${ENSHROUDED_PATH}/backup.sh
+RUN chmod +x ${ENSHROUDED_PATH}/backup.sh
 
 
 USER steam
