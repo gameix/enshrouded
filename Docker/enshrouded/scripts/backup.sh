@@ -2,11 +2,11 @@
 
 # CMD
 CMD_CP="/usr/bin/cp"
-CMD_MKDIR="/usr/bin/mkdirp"
+CMD_MKDIR="/usr/bin/mkdir"
 
 # Quick function to generate a timestamp
 timestamp () {
-  date +"%Y-%m-%d_%H:%M:%S"
+  date +"%Y-%m-%d %H:%M:%S,%3N"
 }
 
 
@@ -15,9 +15,10 @@ function create_backup() {
   echo "[$(timestamp)] -- BACKUP: -> SOURCE: '${SOURCE}'"
   echo "[$(timestamp)] -- BACKUP: -> TARGET: '${TARGET}'"
 
-  TARGET_DATE=$(timestamp)
+  TARGET_DATE=$(date +"%Y-%m-%d_%H%M%S")
   ${CMD_MKDIR} -p ${TARGET}/${TARGET_DATE}
   ${CMD_CP} -a ${SOURCE}/* ${TARGET}/${TARGET_DATE}
+  # excepteion handling if no files in SOURCE PATH
 
 }
 
