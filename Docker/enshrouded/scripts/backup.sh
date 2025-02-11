@@ -5,6 +5,7 @@ CMD_CP="/usr/bin/cp"
 CMD_MKDIR="/usr/bin/mkdir"
 CMD_ECHO="/usr/bin/echo"
 CMD_DATE="/usr/bin/date"
+CMD_LS="/usr/bin/ls"
 
 # Quick function to generate a timestamp
 timestamp () {
@@ -16,7 +17,7 @@ function create_backup() {
   ${CMD_ECHO} "[$(timestamp)] -- BACKUP: -> SOURCE: '${SOURCE}'"
   ${CMD_ECHO} "[$(timestamp)] -- BACKUP: -> TARGET: '${TARGET}'"
 
-  if [ -z "$( ls -A "${SOURCE}" )" ]; then
+  if [ -z "$( ${CMD_LS} -A "${SOURCE}" )" ]; then
      ${CMD_ECHO} "[$(timestamp)] -- BACKUP: --> SOURCE is empty skip backup"
   else
      ${CMD_ECHO} "[$(timestamp)] -- BACKUP: --> SOURCE is not empty create backup"
