@@ -66,7 +66,7 @@ RUN chmod +x /home/steam/entrypoint.sh
 
 # BACKUP FEATURE
 ## Copy enshouded-cron file to the cron.d directory
-COPY enshouded-cron /etc/cron.d/enshouded-cron
+COPY config/enshouded-cron /etc/cron.d/enshouded-cron
 ## Give execution rights on the cron job
 RUN chmod 0644 /etc/cron.d/enshouded-cron
 ## Apply cron job
