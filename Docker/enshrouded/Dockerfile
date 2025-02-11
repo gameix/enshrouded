@@ -50,6 +50,7 @@ RUN groupadd -g $CONTAINER_GID steam \
         locales \
         lib32gcc-s1 \
         cron \
+        vim \
     && echo 'LANG="en_US.UTF-8"' > /etc/default/locale \
     && echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
     && locale-gen \
