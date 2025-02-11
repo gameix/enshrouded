@@ -20,7 +20,7 @@ shutdown () {
 function backup () {
   if [ "${ENABLE_BACKUP}" == "true" ]; then
     # Link logfile to stdout of pid 1 so we can see logs
-    ln -sf /proc/1/fd/1 "${ENSHROUDED_PATH}/backup/backup.log"
+    #ln -sf /proc/1/fd/1 "${ENSHROUDED_PATH}/backup/backup.log"
 
     echo "[$(timestamp)] -- INFO: SETUP BACKUP (Cron job)"
     /usr/sbin/cron &
