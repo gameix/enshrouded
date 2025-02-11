@@ -40,5 +40,5 @@
 8.     # Clean up: 
        apt-get clean && apt-get autoremove -y
 9.     Install Docker compose
-10.     tbd
+10.     Build & Deploy Enshrouded gameserver docker container 
 
