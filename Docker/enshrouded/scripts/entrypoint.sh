@@ -23,6 +23,16 @@ function backup () {
 
 }
 
+# Keep Container running
+function keepContainerRunning () {
+  while :
+  do
+    sleeptime=3
+    echo "ENSHROUDED: Keep Container running...Press [CTRL+C], next run in ${sleeptime} seconds";	sleep ${sleeptime}
+  done
+}
+
+
 # Set our trap
 trap 'shutdown' TERM
 
@@ -86,8 +96,11 @@ if [ -z "$ENABLE_BACKUP" ]; then
 fi
 backup
 
-
 echo "+---------------------------------------------------------------------------------------------------------------"
+
+
+keepContainerRunning
+
 
 # Install/Update Enshrouded
 echo "[$(timestamp)] -- INFO: Updating Enshrouded Dedicated Server"
