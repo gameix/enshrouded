@@ -100,11 +100,8 @@ if [ -z "$ENABLE_BACKUP" ]; then
 fi
 echo "+---------------------------------------------------------------------------------------------------------------"
 
-
 # Setup Backup
 backup
-keepContainerRunning
-
 
 # Install/Update Enshrouded
 echo "[$(timestamp)] -- INFO: Updating Enshrouded Dedicated Server"
