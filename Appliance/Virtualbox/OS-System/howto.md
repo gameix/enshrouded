@@ -4,7 +4,7 @@
 2. Create VM (do not automatically start the VM after creation is done)
    3. RAM: 8GB
    4. CPU: 4vCORES
-   5. HDD 100GB (allocate)
+   5. HDD 100GB (not allocate => small size to download later....)
    6. NETWORK: which has internet connection and sam IP like the Host (Port-forwarding, firewall stuff)
    7. 
 3. Install UBUNTU
@@ -13,7 +13,6 @@
    5. German keyboard
    6. Ubuntu server minimal
    7. DHCP (user muss am router auf dieses andres routen am besten static am router einstellen etc.)
-   8. 192.168.178.56 (remove me)
    9. Use entire harddisk (LVM)
    10. Your Name: gix
    11. Hostname: gameix-appliance
@@ -22,4 +21,19 @@
    13. Skip Ubuntu Pro  NoW
    14. Install ssh
    14. add docker do install
-   15. 
+4. Configure Ubuntu
+5.     sudo -s
+6.     apt-get update \
+       && apt-get install --no-install-recommends -y \
+       curl \
+       wget \
+       jq \
+       cron \
+       vim \
+       rsync \
+       zip \
+       iputils-ping \
+       dnsutils
+
+7.     Verify internet connection (ping google.com etcd)
+
