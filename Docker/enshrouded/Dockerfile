@@ -77,7 +77,7 @@ RUN chown 10000:10000 /etc/cron.d/enshouded-cron
 RUN crontab -u steam /etc/cron.d/enshouded-cron && chmod u+s /usr/sbin/cron
 
 
-#USER steam
+USER steam
 #
 #RUN mkdir "$ENSHROUDED_PATH" \
 #    && mkdir -p "${ENSHROUDED_PATH}/savegame" \

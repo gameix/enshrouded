@@ -19,7 +19,7 @@ shutdown () {
 
 function backup () {
   echo "DEBUG: BACKUP"
-  #/usr/sbin/cron && /usr/bin/tail -f /var/log/cron.log
+    #/usr/sbin/cron && /usr/bin/tail -f /var/log/cron.log
 
 }
 
