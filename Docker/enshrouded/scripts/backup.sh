@@ -28,6 +28,7 @@ function create_backup() {
      ${CMD_CP} -a ${SOURCE}/* ${TARGET}/${TARGET_DATE}
      ${CMD_ECHO} "[$(timestamp)] -- BACKUP: Backup created" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
   fi
+  echo "--------------------------------------------------------------------------------------------------------------"
 }
 
 # Get Arguments

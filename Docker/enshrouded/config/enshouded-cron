@@ -1,9 +1,5 @@
-# must be ended with a new line "LF" (Unix) and not "CRLF" (Windows)
 */1 * * * * /home/steam/backup.sh /home/steam/enshrouded/savegame /home/steam/enshrouded/backup /home/steam/enshrouded/backup/backup.log
 */1 * * * * echo "Hello world i am '$(whoami)' at '$(date)' each 1 minutes hour" >> /home/steam/enshrouded/backup/cron.log 2>&1
 */2 * * * * echo "Hello world i am '$(whoami)'at '$(date)' each 2 minutes hour" >> /home/steam/enshrouded/backup/cron.log 2>&1
 */5 * * * * echo "Hello world i am '$(whoami)' at '$(date)' each 5 minutes hour" >> /home/steam/enshrouded/backup/cron.log 2>&1
 0 * * * * echo "Hello world i am '$(whoami)' at '$(date)' each hour" >> /home/steam/enshrouded/backup/cron.log 2>&1
-
-
-# An empty line is required at the end of this file for a valid cron file.
