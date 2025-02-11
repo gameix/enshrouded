@@ -85,10 +85,14 @@ Enshrouded Gameserver
 #### Restore
     # create a backup location
     BACKUP_PATH="/opt/enshrouded_backup"
+    # Stop gameserver
+    docker stop gameix-enshrouded-gameserver
     # copy world data to world path
     cp -a ${BACKUP_PATH}/* /var/lib/docker/volumes/enshrouded_gameix-enshrouded-persistent-savegame/_data/
     # set permission
     chown 10000:10000 /var/lib/docker/volumes/enshrouded_gameix-enshrouded-persistent-savegame/_data/*
+    # Start gameserver
+    docker start gameix-enshrouded-gameserver
 
 #### Show detailed disk usage of root
     du -cha --max-depth=1 / | grep -E "M|G"
