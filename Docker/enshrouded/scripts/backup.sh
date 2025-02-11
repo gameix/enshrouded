@@ -1,4 +1,11 @@
 #!/bin/bash
+# ---------------------------------------------------------------------------------------------------------------------
+# CRONJOB:
+# EVERY HOUR:  PATH OF SCRIPT:     SOURCE (which should backuped):  TARGET (copy to this location):  LOG FILE PATH:
+# 0 * * * * /home/steam/backup.sh /home/steam/enshrouded/savegame /home/steam/enshrouded/backup /home/steam/enshrouded/logs/enshrouded_server.log
+# OR
+# 0 * * * * /home/gix/backup_enshrouded.sh /var/lib/docker/volumes/enshrouded_gameix-enshrouded-persistent-savegame/_data/ /home/gix/enshrouded_backup/ /home/gix/enshrouded_backup/backup.log
+# ---------------------------------------------------------------------------------------------------------------------
 
 # CMD
 CMD_CP="/usr/bin/cp"
