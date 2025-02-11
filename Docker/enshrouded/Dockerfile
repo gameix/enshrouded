@@ -69,6 +69,7 @@ USER steam
 
 RUN mkdir "$ENSHROUDED_PATH" \
     && mkdir -p "${ENSHROUDED_PATH}/savegame" \
+    && mkdir -p "${ENSHROUDED_PATH}/backup" \
     && mkdir -p "${STEAMCMD_PATH}/compatibilitytools.d" \
     && mkdir -p "${STEAMCMD_PATH}/steamapps/compatdata/${STEAM_APP_ID}" \
     && curl -sqL https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz | tar zxvf - -C ${STEAMCMD_PATH} \

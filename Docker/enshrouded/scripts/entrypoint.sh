@@ -2,6 +2,8 @@
 # ====================================================================================================================
 # FORKED BY: https://github.com/jsknnr/enshrouded-server/blob/main/container/proton/entrypoint.sh
 # ====================================================================================================================
+# VERSION: 0.1.1
+# ====================================================================================================================
 
 
 # Quick function to generate a timestamp
@@ -23,27 +25,27 @@ if [ -z "$SERVER_NAME" ]; then
     SERVER_NAME='GAMEIX.NET Enshrouded Containerized'
     echo "[$(timestamp)] -- WARN: SERVER_NAME Variable not set, using default: 'GAMEIX.NET Enshrouded Containerized'"
   else
-    echo "[$(timestamp)] --  INFO: SERVER_NAME Variable is set: ${SERVER_NAME}"
+    echo "[$(timestamp)] --  INFO: SERVER_NAME Variable is set: '${SERVER_NAME}'"
 fi
 
 if [ -z "$SERVER_PASSWORD" ]; then
     echo "[$(timestamp)] --  WARN: SERVER_PASSWORD Variable not set, server will be open to the public!"
   else
-    echo "[$(timestamp)] --  INFO: SERVER_PASSWORD Variable is set: ${SERVER_PASSWORD}"
+    echo "[$(timestamp)] --  INFO: SERVER_PASSWORD Variable is set: '${SERVER_PASSWORD}'"
 fi
 
 if [ -z "$GAME_PORT" ]; then
     GAME_PORT='15636'
     echo "[$(timestamp)] --  WARN: GAME_PORT Variable not set, using default: '15636'"
   else
-    echo "[$(timestamp)] --  INFO: GAME_PORT Variable is set: ${GAME_PORT}"
+    echo "[$(timestamp)] --  INFO: GAME_PORT Variable is set: '${GAME_PORT}'"
 fi
 
 if [ -z "$QUERY_PORT" ]; then
     QUERY_PORT='15637'
     echo "[$(timestamp)] --  WARN: QUERY_PORT Variable not set, using default: '15637'"
   else
-    echo "[$(timestamp)] --  INFO: QUERY_PORT Variable is set: ${QUERY_PORT}"
+    echo "[$(timestamp)] --  INFO: QUERY_PORT Variable is set: '${QUERY_PORT}'"
 fi
 
 if [ -z "$SERVER_SLOTS" ]; then
@@ -66,6 +68,14 @@ if [ -z "$ENABLE_CHAT" ]; then
   else
     echo "[$(timestamp)] --  INFO: ENABLE_CHAT Variable is set: '${ENABLE_CHAT}'"
 fi
+
+if [ -z "$ENABLE_BACKUP" ]; then
+    ENABLE_BACKUP='true'
+    echo "[$(timestamp)] --  WARN: ENABLE_BACKUP Variable not set, using default: 'true'"
+  else
+    echo "[$(timestamp)] --  INFO: ENABLE_BACKUP Variable is set: '${ENABLE_BACKUP}'"
+fi
+
 
 # Install/Update Enshrouded
 echo "[$(timestamp)] --  INFO: Updating Enshrouded Dedicated Server"
