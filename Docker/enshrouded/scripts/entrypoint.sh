@@ -19,6 +19,7 @@ shutdown () {
 
 function backup () {
   echo "DEBUG: BACKUP"
+  /usr/sbin/cron && /usr/bin/tail -f /var/log/cron.log
 
 }
 
@@ -83,6 +84,9 @@ if [ -z "$ENABLE_BACKUP" ]; then
   else
     echo "[$(timestamp)] -- INFO: ENABLE_BACKUP Variable is set: '${ENABLE_BACKUP}'"
 fi
+backup
+
+
 echo "+---------------------------------------------------------------------------------------------------------------"
 
 # Install/Update Enshrouded
