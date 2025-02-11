@@ -72,8 +72,6 @@ COPY config/enshouded-cron /etc/cron.d/enshouded-cron
 RUN chmod 0644 /etc/cron.d/enshouded-cron
 ## Give execution rights on the cron job
 RUN chown 10000:10000 /etc/cron.d/enshouded-cron
-## Apply cron job
-RUN crontab /etc/cron.d/enshouded-cron
 # Give the necessary rights to the user to run the cron
 RUN crontab -u steam /etc/cron.d/restart-cron && chmod u+s /usr/sbin/cron
 
