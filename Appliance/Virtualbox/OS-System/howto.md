@@ -33,7 +33,12 @@
        rsync \
        zip \
        iputils-ping \
+       git \
        dnsutils
 
 7.     Verify internet connection (ping google.com etcd)
+8.     # Clean up: 
+       apt-get clean && apt-get autoremove -y
+9.     Install Docker compose
+10.     tbd
 
