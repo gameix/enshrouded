@@ -18,7 +18,7 @@ services:
     volumes:
       - gameix-enshrouded-persistent-data:/home/steam
       - gameix-enshrouded-persistent-savegame:/home/steam/enshrouded/savegame
-      - gameix-enshrouded-persistent-savegame:/home/steam/enshrouded/backup
+      - gameix-enshrouded-persistent-backup:/home/steam/enshrouded/backup
 
 volumes:
   gameix-enshrouded-persistent-data:
