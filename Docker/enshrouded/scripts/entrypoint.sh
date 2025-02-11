@@ -17,14 +17,18 @@ shutdown () {
     kill -2 $enshrouded_pid
 }
 
+function backup () {
+  echo "DEBUG: BACKUP"
+
+}
+
 # Set our trap
 trap 'shutdown' TERM
 
 # Validate arguments
-echo "+----------------------+--------------------------------------------------------------------------------------"
-echo "| VERSION: '${VERSION}'|"
-echo "+----------------------+"
-
+echo "+------------------------+--------------------------------------------------------------------------------------"
+echo "| VERSION: '${VERSION}'      |"
+echo "+------------------------+"
 if [ -z "$SERVER_NAME" ]; then
     SERVER_NAME='GAMEIX.NET Enshrouded Containerized'
     echo "[$(timestamp)] -- WARN: SERVER_NAME Variable not set, using default: 'GAMEIX.NET Enshrouded Containerized'"
@@ -79,7 +83,7 @@ if [ -z "$ENABLE_BACKUP" ]; then
   else
     echo "[$(timestamp)] --  INFO: ENABLE_BACKUP Variable is set: '${ENABLE_BACKUP}'"
 fi
-
+echo "+---------------------------------------------------------------------------------------------------------------"
 
 # Install/Update Enshrouded
 echo "[$(timestamp)] --  INFO: Updating Enshrouded Dedicated Server"
@@ -147,7 +151,6 @@ ln -sf /proc/1/fd/1 "${ENSHROUDED_PATH}/logs/enshrouded_server.log"
 
 # Launch Enshrouded
 echo "[$(timestamp)] --  INFO: Starting Enshrouded Dedicated Server"
-
 ${STEAMCMD_PATH}/compatibilitytools.d/GE-Proton${GE_PROTON_VERSION}/proton run ${ENSHROUDED_PATH}/enshrouded_server.exe &
 
 # Find pid for enshrouded_server.exe

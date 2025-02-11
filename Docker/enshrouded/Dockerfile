@@ -49,6 +49,7 @@ RUN groupadd -g $CONTAINER_GID steam \
         jq \
         locales \
         lib32gcc-s1 \
+        cron \
     && echo 'LANG="en_US.UTF-8"' > /etc/default/locale \
     && echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
     && locale-gen \
@@ -63,6 +64,15 @@ COPY scripts/entrypoint.sh /home/steam/entrypoint.sh
 # Set permission
 RUN chmod +x /home/steam/entrypoint.sh
 
+# BACKUP FEATURE
+## Copy enshouded-cron file to the cron.d directory
+COPY enshouded-cron /etc/cron.d/enshouded-cron
+## Give execution rights on the cron job
+RUN chmod 0644 /etc/cron.d/enshouded-cron
+## Apply cron job
+RUN crontab /etc/cron.d/enshouded-cron
+# Create the log file to be able to run tail
+RUN touch /var/log/cron.log
 
 
 USER steam
