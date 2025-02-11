@@ -19,9 +19,12 @@ shutdown () {
 
 function backup () {
   echo "DEBUG: BACKUP"
-    #/usr/sbin/cron && /usr/bin/tail -f /var/log/cron.log
+  if [ ${ENABLE_BACKUP} == "true" ]; then
+    echo "[$(timestamp)] -- INFO Enable backup cron job"
     /usr/sbin/cron &
-
+  else
+    echo "[$(timestamp)] -- INFO Backup not enabled, do nothing"
+  fi
 }
 
 # Keep Container running
