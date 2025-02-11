@@ -87,6 +87,8 @@ Enshrouded Gameserver
     BACKUP_PATH="/opt/enshrouded_backup"
     # Stop gameserver
     docker stop gameix-enshrouded-gameserver
+    # remove existing files
+    rm -f /var/lib/docker/volumes/enshrouded_gameix-enshrouded-persistent-savegame/_data/*
     # copy world data to world path
     cp -a ${BACKUP_PATH}/* /var/lib/docker/volumes/enshrouded_gameix-enshrouded-persistent-savegame/_data/
     # set permission
