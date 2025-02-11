@@ -48,6 +48,7 @@ if [ -z "${BACKUP_LOG_FILE}" ]; then
   ${CMD_ECHO} "[$(timestamp)] -- BACKUP: ERROR no BACKUP_LOG_FILE Path given, exit script" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
   exit 1
 fi
+
 ## Execute ##
 create_backup
 
