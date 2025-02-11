@@ -1,5 +1,11 @@
-# Enshrouded 0.1.0
+# Enshrouded 0.1.1
 Enshrouded Gameserver
+
+## CHANGELOG
+### 0.1.1
+* Add Backup Feature
+### 0.1.0
+* create docker image 
 
 ## Link
 * [Enshrouded Docker](https://github.com/jsknnr/enshrouded-server)
@@ -19,13 +25,13 @@ Enshrouded Gameserver
 #### Build All Images & Deploy
     # Clone git repo
     repo="enshrouded"
-    version="0.1.0"
+    version="0.1.1"
     cd /opt
     rm -rf /opt/${repo}
     git clone https://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@github.com/gameix/${repo}.git
     cd /opt/${repo}
     # Checkout Branch
-    git checkout main
+    git checkout backup-feature
     git branch -a
 
     # Remove existing all containers

@@ -2,7 +2,7 @@ services:
   gameserver:
     build: /opt/enshrouded/Docker/enshrouded/
     container_name: gameix-enshrouded-gameserver
-    image: gameix-enshrouded-gameserver:0.1.0
+    image: gameix-enshrouded-gameserver:0.1.1
     ports:
       - "15636:15636/udp"
       - "15637:15637/udp"
