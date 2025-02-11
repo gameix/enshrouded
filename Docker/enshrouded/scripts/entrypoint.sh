@@ -95,11 +95,11 @@ if [ -z "$ENABLE_BACKUP" ]; then
   else
     echo "[$(timestamp)] -- INFO: ENABLE_BACKUP Variable is set: '${ENABLE_BACKUP}'"
 fi
-backup
-
 echo "+---------------------------------------------------------------------------------------------------------------"
 
 
+# Setup Backup
+backup
 keepContainerRunning
 
 
