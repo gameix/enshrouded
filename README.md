@@ -56,6 +56,27 @@ Enshrouded Gameserver
     # Show logs
     docker logs -f gameix-enshrouded-gameserver
 
+### Run (with docker-compose)
+    # Clone git repo
+    repo="enshrouded"
+    version="0.1.1"
+    cd /opt
+    rm -rf /opt/${repo}
+    git clone https://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@github.com/gameix/${repo}.git
+    cd /opt/${repo}
+    # Checkout Branch
+    git checkout backup-feature
+    git branch -a
+
+    # Remove existing all containers
+    docker rm -f gameix-enshrouded-gameserver
+
+    # Build & Deploy 
+    docker-compose up -d
+    cd /opt
+    
+    # Show logs
+    docker logs -f gameix-enshrouded-gameserver
 
 ### Run (without docker-compose)
     docker volume create enshrouded-persistent-data
