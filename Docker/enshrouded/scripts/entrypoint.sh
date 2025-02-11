@@ -19,10 +19,8 @@ shutdown () {
 
 function backup () {
   if [ "${ENABLE_BACKUP}" == "true" ]; then
-    echo "[$(timestamp)] -- INFO Setup Backup (Cron job)"
+    echo "[$(timestamp)] -- INFO: SETUP BACKUP (Cron job)"
     /usr/sbin/cron &
-  else
-    echo "[$(timestamp)] -- INFO Backup not enabled, do nothing"
   fi
 }
 
