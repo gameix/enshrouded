@@ -11,17 +11,20 @@ timestamp () {
   ${CMD_DATE} +"%Y-%m-%d %H:%M:%S,%3N"
 }
 
-
 function create_backup() {
   ${CMD_ECHO} "[$(timestamp)] -- BACKUP: Start Backup"
   ${CMD_ECHO} "[$(timestamp)] -- BACKUP: -> SOURCE: '${SOURCE}'"
   ${CMD_ECHO} "[$(timestamp)] -- BACKUP: -> TARGET: '${TARGET}'"
 
-  TARGET_DATE=$(${CMD_DATE} +"%Y-%m-%d_%H%M%S")
-  ${CMD_MKDIR} -p ${TARGET}/${TARGET_DATE}
-  ${CMD_CP} -a ${SOURCE}/* ${TARGET}/${TARGET_DATE}
-  # excepteion handling if no files in SOURCE PATH
-
+  if [ -z "$( ls -A "${SOURCE}" )" ]; then
+     ${CMD_ECHO} "[$(timestamp)] -- BACKUP: --> SOURCE is empty skip backup"
+  else
+     ${CMD_ECHO} "[$(timestamp)] -- BACKUP: --> SOURCE is not empty create backup"
+     TARGET_DATE=$(${CMD_DATE} +"%Y-%m-%d_%H%M%S")
+     ${CMD_MKDIR} -p ${TARGET}/${TARGET_DATE}
+     ${CMD_CP} -a ${SOURCE}/* ${TARGET}/${TARGET_DATE}
+     ${CMD_ECHO} "[$(timestamp)] -- BACKUP: Backup created"
+  fi
 }
 
 # Get Arguments
