@@ -2,7 +2,7 @@
 # ====================================================================================================================
 # FORKED BY: https://github.com/jsknnr/enshrouded-server/blob/main/container/proton/entrypoint.sh
 # ====================================================================================================================
-# VERSION: 0.1.1
+VERSION="0.1.1"
 # ====================================================================================================================
 
 
@@ -21,6 +21,10 @@ shutdown () {
 trap 'shutdown' TERM
 
 # Validate arguments
+echo "+----------------------+--------------------------------------------------------------------------------------"
+echo "| VERSION: '${VERSION}'|"
+echo "+----------------------+"
+
 if [ -z "$SERVER_NAME" ]; then
     SERVER_NAME='GAMEIX.NET Enshrouded Containerized'
     echo "[$(timestamp)] -- WARN: SERVER_NAME Variable not set, using default: 'GAMEIX.NET Enshrouded Containerized'"

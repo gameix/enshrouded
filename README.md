@@ -44,9 +44,9 @@ Enshrouded Gameserver
     docker system prune -af --volumes
 
     # Remove existing volume
-    #docker volume rm -f enshrouded_gameix-enshrouded-persistent-data
-    #docker volume rm -f enshrouded_gameix-enshrouded-persistent-savegame
-    #docker volume rm -f enshrouded_gameix-enshrouded-persistent-backup
+    docker volume rm -f enshrouded_gameix-enshrouded-persistent-data
+    docker volume rm -f enshrouded_gameix-enshrouded-persistent-savegame
+    docker volume rm -f enshrouded_gameix-enshrouded-persistent-backup
     sync
 
     # Build & Deploy 
