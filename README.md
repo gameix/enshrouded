@@ -44,9 +44,9 @@ Enshrouded Gameserver
     docker system prune -af --volumes
 
     # Remove existing volume
-    docker volume rm -f enshrouded_gameix-enshrouded-persistent-data
-    docker volume rm -f enshrouded_gameix-enshrouded-persistent-savegame
-    docker volume rm -f enshrouded_gameix-enshrouded-persistent-backup
+    #docker volume rm -f enshrouded_gameix-enshrouded-persistent-data
+    #docker volume rm -f enshrouded_gameix-enshrouded-persistent-savegame
+    #docker volume rm -f enshrouded_gameix-enshrouded-persistent-backup
     sync
 
     # Build & Deploy 
@@ -56,7 +56,7 @@ Enshrouded Gameserver
     # Show logs
     docker logs -f gameix-enshrouded-gameserver
 
-### Run (with docker-compose no gameserver data will be lost)
+### Run/Update (with docker-compose no gameserver data will be lost)
     # Clone git repo
     repo="enshrouded"
     version="0.1.1"
@@ -70,6 +70,12 @@ Enshrouded Gameserver
 
     # Remove existing all containers
     docker rm -f gameix-enshrouded-gameserver
+
+    # Remove current devloping image
+    docker rmi -f gameix-enshrouded-gameserver:${version}
+    
+    # Remove all old docker images etc.
+    docker system prune -af --volumes
 
     # Build & Deploy 
     docker-compose up -d
