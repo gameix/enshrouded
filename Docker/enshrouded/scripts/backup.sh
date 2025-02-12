@@ -13,6 +13,7 @@ CMD_MKDIR="/usr/bin/mkdir"
 CMD_ECHO="/usr/bin/echo"
 CMD_DATE="/usr/bin/date"
 CMD_LS="/usr/bin/ls"
+CMD_DU="/usr/bin/du"
 CMD_TEE="/usr/bin/tee"
 
 # Quick function to generate a timestamp
@@ -22,7 +23,7 @@ timestamp () {
 
 # get size of folder
 function get_size() {
-  echo "[$(timestamp)] -- BACKUP: Size of Folder '${1}' is: '$(du -h max-depth=1 ${1}'"
+  echo "[$(timestamp)] -- BACKUP: Size of Folder '${1}' is: '$(${CMD_DU} -h max-depth=1 ${1}'"
 }
 
 
