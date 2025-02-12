@@ -42,7 +42,7 @@ function create_backup() {
   if [ -z "$( ${CMD_LS} -A "${SOURCE}" )" ]; then
      ${CMD_ECHO} "[$(timestamp)] -- BACKUP: --> SOURCE is empty skip backup" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
   else
-     TARGET_DATE=$(${CMD_DATE} +"%Y-%m-%d_%HH%MM%SS")
+     TARGET_DATE=$(${CMD_DATE} +"%Y-%m-%d_%HH%MM%SS_%Z")
      ${CMD_ECHO} "[$(timestamp)] -- BACKUP: --> SOURCE is not empty create backup to '${TARGET}/${TARGET_DATE}'" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
      ${CMD_MKDIR} -p ${TARGET}/${TARGET_DATE}
      ${CMD_CP} -a ${SOURCE}/* ${TARGET}/${TARGET_DATE}
