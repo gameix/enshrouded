@@ -56,7 +56,7 @@ Enshrouded Gameserver
     # Show logs
     docker logs -f gameix-enshrouded-gameserver
 
-### Run (with docker-compose)
+### Run (with docker-compose no gameserver data will be lost)
     # Clone git repo
     repo="enshrouded"
     version="0.1.1"
