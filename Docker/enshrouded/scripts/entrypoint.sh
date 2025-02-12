@@ -1,7 +1,5 @@
 #!/bin/bash
 # ====================================================================================================================
-# FORKED BY: https://github.com/jsknnr/enshrouded-server/blob/main/container/proton/entrypoint.sh
-# ====================================================================================================================
 VERSION="0.1.1"
 # ====================================================================================================================
 
@@ -31,7 +29,6 @@ function keepContainerRunning () {
     echo "ENSHROUDED: Keep Container running...Press [CTRL+C], next run in ${sleeptime} seconds";	sleep ${sleeptime}
   done
 }
-
 
 # Set our trap
 trap 'shutdown' TERM

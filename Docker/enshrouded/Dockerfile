@@ -1,5 +1,5 @@
 # ====================================================================================================================
-# FORKED BY: https://github.com/jsknnr/enshrouded-server/blob/main/container/proton/Dockerfile
+# VERSION: 0.1.1
 # ====================================================================================================================
 
 # Base image
@@ -60,7 +60,7 @@ RUN groupadd -g $CONTAINER_GID steam \
     && apt-get clean \
     && apt-get autoremove -y
 
-# Copy Entrypoint
+# Copy Entrypoint (all scipts must be in root, else will not update if the data volume was not removed = upgrade procedure)
 COPY scripts/entrypoint.sh /entrypoint.sh
 # Set permission
 RUN chmod +x /entrypoint.sh
@@ -76,8 +76,8 @@ RUN chown $CONTAINER_GID:$CONTAINER_GID /etc/cron.d/enshouded-cron
 # Give the necessary rights to the user to run the cron
 RUN crontab -u steam /etc/cron.d/enshouded-cron && chmod u+s /usr/sbin/cron
 ## Copy Backup script
-COPY scripts/backup.sh ${HOME}/backup.sh
-RUN chmod +x ${HOME}/backup.sh
+COPY scripts/backup.sh /backup.sh
+RUN chmod +x /backup.sh
 
 
 USER steam
