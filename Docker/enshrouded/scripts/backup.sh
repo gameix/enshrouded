@@ -20,6 +20,12 @@ timestamp () {
   ${CMD_DATE} +"%Y-%m-%d %H:%M:%S,%3N"
 }
 
+# get size of folder
+function get_size() {
+  echo "[$(timestamp)] -- BACKUP: Size of Folder '${1}' is: '$(du -h max-depth=1 ${1}'"
+}
+
+
 function create_backup() {
   ${CMD_ECHO} "[$(timestamp)] -- BACKUP: Start Backup" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
   ${CMD_ECHO} "[$(timestamp)] -- BACKUP: -> SOURCE: '${SOURCE}'" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
