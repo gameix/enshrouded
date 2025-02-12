@@ -27,6 +27,11 @@ function get_size() {
   #todo: only return in MB
 }
 
+# remove backup files
+function remove_backup_files(){
+  echo "remove backupnfiles older then N Days"
+}
+
 
 function create_backup() {
   ${CMD_ECHO} "[$(timestamp)] -- BACKUP: Start Backup" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
