@@ -23,7 +23,8 @@ timestamp () {
 
 # get size of folder
 function get_size() {
-  echo "[$(timestamp)] -- BACKUP: Size of Folder '${1}' is: '$(${CMD_DU} -h max-depth=1 ${1}'"
+  echo "[$(timestamp)] -- BACKUP: Size of Folder '${1}' is: '$(${CMD_DU} -h max-depth=1 ${1})'"
+  #todo: only return in MB
 }
 
 
