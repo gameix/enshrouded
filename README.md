@@ -44,13 +44,13 @@ Enshrouded Gameserver
     docker system prune -af --volumes
 
     # Remove existing volume
-    #docker volume rm -f enshrouded_gameix-enshrouded-persistent-data
+    docker volume rm -f enshrouded_gameix-enshrouded-persistent-data
     #docker volume rm -f enshrouded_gameix-enshrouded-persistent-savegame
     #docker volume rm -f enshrouded_gameix-enshrouded-persistent-backup
     sync
 
     # Build & Deploy 
-    docker-compose up -d
+    docker-compose up -d 
     cd /opt
     
     # Show logs
@@ -140,7 +140,10 @@ Enshrouded Gameserver
 ## BUGS
     # Error in entrypoint.sh line 98
         -> jq: error (at /home/steam/enshrouded/enshrouded_server.json:60): string ("true") cannot be parsed as a number
-
+    # Update image:
+        -> /home/steam/entrypoint.sh will not updated with new !!
+        --> WORKAROUND: remove enshrouded_gameix-enshrouded-persistent-data docker volume
+        ---> SOLUTION: this file should not be in /home/steam folder 
 
 # The Virtualbox Appliance
     Idea: 

@@ -61,9 +61,9 @@ RUN groupadd -g $CONTAINER_GID steam \
     && apt-get autoremove -y
 
 # Copy Entrypoint
-COPY scripts/entrypoint.sh /home/steam/entrypoint.sh
+COPY scripts/entrypoint.sh /entrypoint.sh
 # Set permission
-RUN chmod +x /home/steam/entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 
 # BACKUP FEATURE
@@ -103,4 +103,4 @@ COPY config/enshrouded_server_example.json /home/steam/enshrouded_server_example
 
 WORKDIR /home/steam
 
-CMD ["/home/steam/entrypoint.sh"]
+CMD ["/entrypoint.sh"]
