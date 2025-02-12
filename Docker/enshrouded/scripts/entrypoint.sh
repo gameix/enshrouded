@@ -110,7 +110,7 @@ fi
 if [ $EXTERNAL_CONFIG -eq 0 ]; then
     if ! [ -f "${ENSHROUDED_PATH}/enshrouded_server.json" ]; then
         echo "[$(timestamp)] -- INFO: Enshrouded server config not present, copying example"
-        cp /home/steam/enshrouded_server_example.json ${ENSHROUDED_PATH}/enshrouded_server.json
+        cp /enshrouded_server_example.json ${ENSHROUDED_PATH}/enshrouded_server.json
     fi
 fi
 

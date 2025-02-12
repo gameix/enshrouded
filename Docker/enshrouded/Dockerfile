@@ -99,7 +99,7 @@ RUN mkdir "$ENSHROUDED_PATH" \
 
 
 # Copy enshreouded config file
-COPY config/enshrouded_server_example.json /home/steam/enshrouded_server_example.json
+COPY config/enshrouded_server_example.json /enshrouded_server_example.json
 
 WORKDIR /home/steam
 
