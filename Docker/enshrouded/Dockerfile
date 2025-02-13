@@ -74,7 +74,7 @@ RUN chmod +x /entrypoint.sh
 ## Copy enshouded-cron file to the cron.d directory
 COPY config/enshouded-cron $BACKUP_CRONJOB_FILE
 ## Give execution rights on the cron job
-RUN chmod 0644 $BACKUP_CRONJOB_FILE
+RUN chmod 0744 $BACKUP_CRONJOB_FILE
 ## Give execution rights on the cron job
 RUN chown $CONTAINER_GID:$CONTAINER_GID $BACKUP_CRONJOB_FILE
 # Give the necessary rights to the user to run the cron
