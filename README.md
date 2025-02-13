@@ -12,6 +12,9 @@ Enshrouded Gameserver
 * [Enable voice and chat:](https://steamcommunity.com/sharedfiles/filedetails/?id=3417090067)
 * [Recommended Server Specifications ](https://enshrouded.zendesk.com/hc/en-us/articles/16055628734109-Recommended-Server-Specifications)
 
+## TODO:
+* Add Update gameserver feature in running container (no stop start container is needed anymore)
+
 ### Build & Deployment
 
 #### Docker-Compose installation
@@ -45,8 +48,8 @@ Enshrouded Gameserver
 
     # Remove existing volume
     docker volume rm -f enshrouded_gameix-enshrouded-persistent-data
-    docker volume rm -f enshrouded_gameix-enshrouded-persistent-savegame
-    docker volume rm -f enshrouded_gameix-enshrouded-persistent-backup
+    #docker volume rm -f enshrouded_gameix-enshrouded-persistent-savegame
+    #docker volume rm -f enshrouded_gameix-enshrouded-persistent-backup
     sync
 
     # Build & Deploy 
