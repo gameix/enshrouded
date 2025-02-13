@@ -23,8 +23,7 @@ timestamp () {
 
 # get size of folder
 function get_size() {
-  echo "[$(timestamp)] -- BACKUP: Size of Folder '${1}' is: '$(${CMD_DU} -h max-depth=1 ${1})'"
-  #todo: only return in MB
+  ${CMD_DU} -h ${1} | awk '{ print $1 }'
 }
 
 # remove backup files
@@ -46,7 +45,7 @@ function create_backup() {
      ${CMD_ECHO} "[$(timestamp)] -- BACKUP: --> SOURCE is not empty create backup to '${TARGET}/${TARGET_DATE}'" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
      ${CMD_MKDIR} -p ${TARGET}/${TARGET_DATE}
      ${CMD_CP} -a ${SOURCE}/* ${TARGET}/${TARGET_DATE}
-     ${CMD_ECHO} "[$(timestamp)] -- BACKUP: Backup created" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
+     ${CMD_ECHO} "[$(timestamp)] -- BACKUP: Backup created (Size: $(get_size ${TARGET}/${TARGET_DATE}))" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
   fi
   echo "--------------------------------------------------------------------------------------------------------------" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
 }
