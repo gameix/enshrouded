@@ -33,7 +33,7 @@ function backup () {
     /usr/bin/sed -i "s|BACKUP_SOURCE|$BACKUP_SOURCE|g" /tmp/"${BACKUP_CRONJOB_FILE_NAME}"
     /usr/bin/sed -i "s|BACKUP_TARGET|$BACKUP_TARGET|g" /tmp/"${BACKUP_CRONJOB_FILE_NAME}"
     /usr/bin/sed -i "s|BACKUP_LOGFILE|$BACKUP_LOGFILE|g" /tmp/"${BACKUP_CRONJOB_FILE_NAME}"
-
+    /usr/bin/sed -i "s|BACKUP_ARCHIVE_TIME_DAYS|$BACKUP_ARCHIVE_TIME_DAYS|g" /tmp/"${BACKUP_CRONJOB_FILE_NAME}"
     ## copy to cron.d path back
     /usr/bin/cp -f /tmp/"${BACKUP_CRONJOB_FILE_NAME}" "${BACKUP_CRONJOB_FILE_PATH}"
     ## remove temporary cron.d file

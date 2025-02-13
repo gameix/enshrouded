@@ -28,15 +28,13 @@ function get_size() {
 
 # remove backup files
 function remove_backup_files(){
-  if [ -z "${BACKUP_ARCHIVE_TIME}" ]; then
-    ${CMD_ECHO} "[$(timestamp)] -- BACKUP: ERROR no BACKUP_ARCHIVE_TIME Path given, exit script" | ${CMD_TEE} -a "${BACKUP_ARCHIVE_TIME}"
+  if [ -z "${BACKUP_ARCHIVE_TIME_DAYS}" ]; then
+    ${CMD_ECHO} "[$(timestamp)] -- BACKUP: WARN no BACKUP_ARCHIVE_TIME_DAYS given, exit to remove backup files" | ${CMD_TEE} -a "${BACKUP_ARCHIVE_TIME_DAYS}"
     exit 1
+  else
+    ${CMD_ECHO} "[$(timestamp)] -- BACKUP: INFO Remove backup files there are older then '${BACKUP_ARCHIVE_TIME_DAYS}' days" | ${CMD_TEE} -a "${BACKUP_ARCHIVE_TIME_DAYS}"
+    /usr/bin/find "${TARGET}" -type d -mtime +"${BACKUP_ARCHIVE_TIME_DAYS}" -delete
   fi
-  if [ -z "${BACKUP_ARCHIVE_UNIT}" ]; then
-    ${CMD_ECHO} "[$(timestamp)] -- BACKUP: ERROR no BACKUP_ARCHIVE_UNIT Path given, exit script" | ${CMD_TEE} -a "${BACKUP_ARCHIVE_UNIT}"
-    exit 1
-  fi
-
 }
 
 function create_backup() {
@@ -55,7 +53,7 @@ function create_backup() {
      ${CMD_CP} -a "${SOURCE}"/ "${TARGET}/${TARGET_DATE}/"
      ${CMD_ECHO} "[$(timestamp)] -- BACKUP: Backup created (Size: $(get_size "${TARGET}"/"${TARGET_DATE}"))" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
   fi
-  echo "--------------------------------------------------------------------------------------------------------------" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
+  ${CMD_ECHO} "--------------------------------------------------------------------------------------------------------------" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
 }
 
 # Get Arguments
@@ -63,6 +61,7 @@ shift $((OPTIND - 1))
 SOURCE=$1
 TARGET=$2
 BACKUP_LOG_FILE=$3
+BACKUP_ARCHIVE_TIME_DAYS=$4   # not mandatory
 if [ -z "${SOURCE}" ]; then
   ${CMD_ECHO} "[$(timestamp)] -- BACKUP: ERROR no SOURCE Path given, exit script" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
   exit 1
@@ -78,6 +77,7 @@ fi
 
 ## Execute ##
 create_backup
+remove_backup_files
 
 
 
