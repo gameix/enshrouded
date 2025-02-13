@@ -21,7 +21,13 @@ function backup () {
     echo "[$(timestamp)] -- INFO: -> Backup Cronjob: ${BACKUP_CRONJOB_FILE}"
 
     # change cron job file
-    /usr/bin/sed -i "s|BACKUP_SCRIPT|$BACKUP_SCRIPT|g" "${BACKUP_CRONJOB_FILE}"
+    # copy default cronjob file temporary to change (REASON: /usr/bin/sed: couldn't open temporary file /etc/cron.d/sedZ7K83k: Permission denied)
+    /usr/bin/cp "${BACKUP_CRONJOB_FILE_PATH}" /tmp/"${BACKUP_CRONJOB_FILE_NAME}"
+    # change it
+    /usr/bin/sed -i "s|BACKUP_SCRIPT|$BACKUP_SCRIPT|g" /tmp/"${BACKUP_CRONJOB_FILE_NAME}"
+    # copy to cron.d path
+    /usr/bin/cp  tmp/"${BACKUP_CRONJOB_FILE_NAME}" "${BACKUP_CRONJOB_FILE_PATH}"
+
 
     # start cron (in background)
     /usr/sbin/cron &

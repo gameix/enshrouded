@@ -35,7 +35,8 @@ ENV STEAM_COMPAT_CLIENT_INSTALL_PATH="$STEAMCMD_PATH"
 ENV STEAM_COMPAT_DATA_PATH="${STEAMCMD_PATH}/steamapps/compatdata/${STEAM_APP_ID}"
 ENV UMU_ID=0
 ENV BACKUP_SCRIPT="/backup.sh"
-ENV BACKUP_CRONJOB_FILE="/etc/cron.d/enshouded-cron"
+ENV BACKUP_CRONJOB_FILE_NAME="enshouded-cron"
+ENV BACKUP_CRONJOB_FILE_PATH="/etc/cron.d/$BACKUP_CRONJOB_FILE_NAME"
 
 
 
@@ -72,13 +73,13 @@ RUN chmod +x /entrypoint.sh
 
 # BACKUP FEATURE
 ## Copy enshouded-cron file to the cron.d directory
-COPY config/enshouded-cron $BACKUP_CRONJOB_FILE
+COPY config/enshouded-cron $BACKUP_CRONJOB_FILE_PATH
 ## Give execution rights on the cron job
-RUN chmod 0744 $BACKUP_CRONJOB_FILE
+RUN chmod 0644 $BACKUP_CRONJOB_FILE_PATH
 ## Give execution rights on the cron job
-RUN chown $CONTAINER_GID:$CONTAINER_GID $BACKUP_CRONJOB_FILE
+RUN chown $CONTAINER_GID:$CONTAINER_GID BACKUP_CRONJOB_FILE_PATH
 # Give the necessary rights to the user to run the cron
-RUN crontab -u steam $BACKUP_CRONJOB_FILE && chmod u+s /usr/sbin/cron
+RUN crontab -u steam $BACKUP_CRONJOB_FILE_PATH && chmod u+s /usr/sbin/cron
 ## Copy Backup script
 COPY scripts/backup.sh $BACKUP_SCRIPT
 RUN chmod +x $BACKUP_SCRIPT
