@@ -16,20 +16,22 @@ shutdown () {
 
 function backup () {
   if [ "${ENABLE_BACKUP}" == "true" ]; then
+    # Summary
     echo "[$(timestamp)] -- INFO: SETUP BACKUP (Cron job)"
     echo "[$(timestamp)] -- INFO: -> Backup Script: ${BACKUP_SCRIPT}"
     echo "[$(timestamp)] -- INFO: -> Backup Cronjob: ${BACKUP_CRONJOB_FILE}"
 
-    # change cron job file
-    # copy default cronjob file temporary to change (REASON: /usr/bin/sed: couldn't open temporary file /etc/cron.d/sedZ7K83k: Permission denied)
+    # Adjust cron job file
+    ## copy default cronjob file temporary to change (REASON: /usr/bin/sed: couldn't open temporary file /etc/cron.d/sedZ7K83k: Permission denied)
     /usr/bin/cp "${BACKUP_CRONJOB_FILE_PATH}" /tmp/"${BACKUP_CRONJOB_FILE_NAME}"
-    # change it
+    ## change it
     /usr/bin/sed -i "s|BACKUP_SCRIPT|$BACKUP_SCRIPT|g" /tmp/"${BACKUP_CRONJOB_FILE_NAME}"
-    # copy to cron.d path
-    /usr/bin/cp  tmp/"${BACKUP_CRONJOB_FILE_NAME}" "${BACKUP_CRONJOB_FILE_PATH}"
+    ## copy to cron.d path back
+    /usr/bin/cp -f /tmp/"${BACKUP_CRONJOB_FILE_NAME}" "${BACKUP_CRONJOB_FILE_PATH}"
+    ## remove temporary cron.d file
+    /usr/bin/rm /tmp/"${BACKUP_CRONJOB_FILE_NAME}"
 
-
-    # start cron (in background)
+    # Start cron (in background)
     /usr/sbin/cron &
   fi
 }

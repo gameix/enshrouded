@@ -15,7 +15,7 @@ services:
       - SERVER_IP=0.0.0.0
       - ENABLE_CHAT=true
       - ENABLE_BACKUP=true
-      - BACKUP_ARCHIVE_TIME=3
+      - BACKUP_ARCHIVE_TIME_DAYS=3
     volumes:
       - gameix-enshrouded-persistent-data:/home/steam
       - gameix-enshrouded-persistent-savegame:/home/steam/enshrouded/savegame
