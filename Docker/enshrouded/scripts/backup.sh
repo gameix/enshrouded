@@ -28,7 +28,15 @@ function get_size() {
 
 # remove backup files
 function remove_backup_files(){
-  echo "remove backupnfiles older then N Days"
+  if [ -z "${BACKUP_ARCHIVE_TIME}" ]; then
+    ${CMD_ECHO} "[$(timestamp)] -- BACKUP: ERROR no BACKUP_ARCHIVE_TIME Path given, exit script" | ${CMD_TEE} -a "${BACKUP_ARCHIVE_TIME}"
+    exit 1
+  fi
+  if [ -z "${BACKUP_ARCHIVE_UNIT}" ]; then
+    ${CMD_ECHO} "[$(timestamp)] -- BACKUP: ERROR no BACKUP_ARCHIVE_UNIT Path given, exit script" | ${CMD_TEE} -a "${BACKUP_ARCHIVE_UNIT}"
+    exit 1
+  fi
+
 }
 
 function create_backup() {

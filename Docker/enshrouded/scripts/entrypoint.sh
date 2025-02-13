@@ -17,6 +17,13 @@ shutdown () {
 function backup () {
   if [ "${ENABLE_BACKUP}" == "true" ]; then
     echo "[$(timestamp)] -- INFO: SETUP BACKUP (Cron job)"
+    echo "[$(timestamp)] -- INFO: -> Backup Script: ${BACKUP_SCRIPT}"
+    echo "[$(timestamp)] -- INFO: -> Backup Cronjob: ${BACKUP_CRONJOB_FILE}"
+
+    # change cron job file
+    /usr/bin/sed -i "s|BACKUP_SCRIPT|$BACKUP_SCRIPT|g" "${BACKUP_CRONJOB_FILE}"
+
+    # start cron (in background)
     /usr/sbin/cron &
   fi
 }
@@ -91,6 +98,15 @@ if [ -z "$ENABLE_BACKUP" ]; then
   else
     echo "[$(timestamp)] -- INFO: ENABLE_BACKUP Variable is set: '${ENABLE_BACKUP}'"
 fi
+
+if [ -z "${BACKUP_ARCHIVE_TIME_DAYS}" ]; then
+    BACKUP_ARCHIVE_TIME_DAYS="3"
+    echo "[$(timestamp)] -- WARN: BACKUP_ARCHIVE_TIME_DAYS Variable not set, using default: '3'"
+  else
+    echo "[$(timestamp)] -- INFO: BACKUP_ARCHIVE_TIME_DAYS Variable is set: '${BACKUP_ARCHIVE_TIME_DAYS}'"
+fi
+
+
 echo "+---------------------------------------------------------------------------------------------------------------"
 
 # Setup Backup
