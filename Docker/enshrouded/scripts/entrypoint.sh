@@ -19,13 +19,20 @@ function backup () {
     # Summary
     echo "[$(timestamp)] -- INFO: SETUP BACKUP (Cron job)"
     echo "[$(timestamp)] -- INFO: -> Backup Script: ${BACKUP_SCRIPT}"
-    echo "[$(timestamp)] -- INFO: -> Backup Cronjob: ${BACKUP_CRONJOB_FILE}"
+    echo "[$(timestamp)] -- INFO: -> Backup Cronjob: ${BACKUP_CRONJOB_FILE_PATH}"
+    echo "[$(timestamp)] -- INFO: --> Backup Source: ${BACKUP_SOURCE}"
+    echo "[$(timestamp)] -- INFO: --> Backup Target: ${BACKUP_TARGET}"
+    echo "[$(timestamp)] -- INFO: --> Backup Log File: ${BACKUP_LOGFILE}"
 
     # Adjust cron job file
     ## copy default cronjob file temporary to change (REASON: /usr/bin/sed: couldn't open temporary file /etc/cron.d/sedZ7K83k: Permission denied)
     /usr/bin/cp "${BACKUP_CRONJOB_FILE_PATH}" /tmp/"${BACKUP_CRONJOB_FILE_NAME}"
     ## change it
     /usr/bin/sed -i "s|BACKUP_SCRIPT|$BACKUP_SCRIPT|g" /tmp/"${BACKUP_CRONJOB_FILE_NAME}"
+    /usr/bin/sed -i "s|BACKUP_SOURCE|$BACKUP_SOURCE|g" /tmp/"${BACKUP_CRONJOB_FILE_NAME}"
+    /usr/bin/sed -i "s|BACKUP_TARGET|$BACKUP_TARGET|g" /tmp/"${BACKUP_CRONJOB_FILE_NAME}"
+    /usr/bin/sed -i "s|BACKUP_LOGFILE|$BACKUP_LOGFILE|g" /tmp/"${BACKUP_CRONJOB_FILE_NAME}"
+
     ## copy to cron.d path back
     /usr/bin/cp -f /tmp/"${BACKUP_CRONJOB_FILE_NAME}" "${BACKUP_CRONJOB_FILE_PATH}"
     ## remove temporary cron.d file

@@ -2,4 +2,4 @@
 0 * * * * /backup.sh /home/steam/enshrouded/savegame /home/steam/enshrouded/backup /home/steam/enshrouded/logs/enshrouded_server.log
 
 # TEST
-* * * * * BACKUP_SCRIPT /home/steam/enshrouded/savegame /home/steam/enshrouded/backup /home/steam/enshrouded/logs/enshrouded_server.log
+* * * * * BACKUP_SCRIPT BACKUP_SOURCE BACKUP_TARGET BACKUP_LOGFILE

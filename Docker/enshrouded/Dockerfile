@@ -38,7 +38,9 @@ ENV UMU_ID=0
 ENV BACKUP_SCRIPT="/backup.sh"
 ENV BACKUP_CRONJOB_FILE_NAME="enshouded-cron"
 ENV BACKUP_CRONJOB_FILE_PATH="/etc/cron.d/$BACKUP_CRONJOB_FILE_NAME"
-
+ENV BACKUP_SOURCE="$ENSHROUDED_PATH/savegame"
+ENV BACKUP_TARGET="${ENSHROUDED_PATH}/backup"
+ENV BACKUP_LOGFILE="$ENSHROUDED_PATH/logs/enshrouded_server.log"
 
 
 RUN groupadd -g $CONTAINER_GID steam \
@@ -89,8 +91,8 @@ RUN chmod +x $BACKUP_SCRIPT
 USER steam
 
 RUN mkdir "$ENSHROUDED_PATH" \
-    && mkdir -p "${ENSHROUDED_PATH}/savegame" \
-    && mkdir -p "${ENSHROUDED_PATH}/backup" \
+    && mkdir -p "${BACKUP_SOURCE}" \
+    && mkdir -p "${BACKUP_TARGET}" \
     && mkdir -p "${STEAMCMD_PATH}/compatibilitytools.d" \
     && mkdir -p "${STEAMCMD_PATH}/steamapps/compatdata/${STEAM_APP_ID}" \
     && curl -sqL https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz | tar zxvf - -C ${STEAMCMD_PATH} \
