@@ -17,7 +17,7 @@ shutdown () {
 function backup () {
   if [ "${ENABLE_BACKUP}" == "true" ]; then
     # Summary
-    echo "[$(timestamp)] -- INFO: SETUP BACKUP (Cron job)"
+    echo "[$(timestamp)] -- INFO: SETUP BACKUP (Cron job):"
     echo "[$(timestamp)] -- INFO: -> Backup Script: ${BACKUP_SCRIPT}"
     echo "[$(timestamp)] -- INFO: -> Backup Cronjob: ${BACKUP_CRONJOB_FILE_PATH}"
     echo "[$(timestamp)] -- INFO: --> Backup Source: ${BACKUP_SOURCE}"
