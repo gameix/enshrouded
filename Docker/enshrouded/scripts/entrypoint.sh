@@ -132,6 +132,9 @@ echo "+-------------------------------------------------------------------------
 # Setup Backup
 backup
 
+# TEST
+keepContainerRunning
+
 # Install/Update Enshrouded
 echo "[$(timestamp)] -- INFO: Updating Enshrouded Dedicated Server"
 ${STEAMCMD_PATH}/steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir "$ENSHROUDED_PATH" +login anonymous +app_update ${STEAM_APP_ID} validate +quit
