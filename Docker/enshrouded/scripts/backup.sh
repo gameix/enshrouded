@@ -33,7 +33,8 @@ function remove_backup_files(){
     exit 1
   else
     ${CMD_ECHO} "[$(timestamp)] -- BACKUP: INFO Remove backup files there are older then '${BACKUP_ARCHIVE_TIME_DAYS}' days" | ${CMD_TEE} -a "${BACKUP_ARCHIVE_TIME_DAYS}"
-    /usr/bin/find "${TARGET}" -type d -mtime +"${BACKUP_ARCHIVE_TIME_DAYS}" -delete
+    #/usr/bin/find "${TARGET}" -type d -mtime +"${BACKUP_ARCHIVE_TIME_DAYS}" -delete
+    /usr/bin/find "${TARGET}" -type d -mmin +"${BACKUP_ARCHIVE_TIME_DAYS}" -delete
   fi
 }
 
