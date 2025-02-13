@@ -34,7 +34,7 @@ Enshrouded Gameserver
     git clone https://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@github.com/gameix/${repo}.git
     cd /opt/${repo}
     # Checkout Branch
-    git checkout backup-feature
+    git checkout main
     git branch -a
 
     # Remove existing all containers
@@ -68,7 +68,7 @@ Enshrouded Gameserver
     git clone https://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@github.com/gameix/${repo}.git
     cd /opt/${repo}
     # Checkout Branch
-    git checkout backup-feature
+    git checkout main
     git branch -a
 
     # Remove existing all containers
