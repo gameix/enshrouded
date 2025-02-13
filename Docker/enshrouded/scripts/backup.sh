@@ -23,7 +23,7 @@ timestamp () {
 
 # get size of folder
 function get_size() {
-  ${CMD_DU} -h ${1} | awk '{ print $1 }'
+  ${CMD_DU} -h --max-depth=0 "${1}" | awk '{ print $1 }'
 }
 
 # remove backup files
@@ -43,9 +43,9 @@ function create_backup() {
   else
      TARGET_DATE=$(${CMD_DATE} +"%Y-%m-%d_%HH%MM%SS_%Z")
      ${CMD_ECHO} "[$(timestamp)] -- BACKUP: --> SOURCE is not empty create backup to '${TARGET}/${TARGET_DATE}'" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
-     ${CMD_MKDIR} -p ${TARGET}/${TARGET_DATE}
-     ${CMD_CP} -a ${SOURCE}/* ${TARGET}/${TARGET_DATE}
-     ${CMD_ECHO} "[$(timestamp)] -- BACKUP: Backup created (Size: $(get_size ${TARGET}/${TARGET_DATE}))" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
+     ${CMD_MKDIR} -p "${TARGET}"/"${TARGET_DATE}"
+     ${CMD_CP} -a "${SOURCE}"/ "${TARGET}/${TARGET_DATE}/"
+     ${CMD_ECHO} "[$(timestamp)] -- BACKUP: Backup created (Size: $(get_size "${TARGET}"/"${TARGET_DATE}"))" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
   fi
   echo "--------------------------------------------------------------------------------------------------------------" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
 }
