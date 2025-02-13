@@ -45,7 +45,7 @@ function backup () {
     ### Give execution rights on the cron job
     /usr/bin/chown "${CONTAINER_GID}":"${CONTAINER_GID}" "${BACKUP_CRONJOB_FILE_PATH}"
 
-    # add crontab job
+    # Add crontab job
     /usr/bin/crontab -u steam "${BACKUP_CRONJOB_FILE_PATH}"
 
     # Start cron (in background)
@@ -134,9 +134,6 @@ echo "+-------------------------------------------------------------------------
 
 # Setup Backup
 backup
-
-# TEST
-keepContainerRunning
 
 # Install/Update Enshrouded
 echo "[$(timestamp)] -- INFO: Updating Enshrouded Dedicated Server"
