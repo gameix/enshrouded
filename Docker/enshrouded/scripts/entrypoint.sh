@@ -39,6 +39,11 @@ function backup () {
     /usr/bin/cp -f /tmp/"${BACKUP_CRONJOB_FILE_NAME}" "${BACKUP_CRONJOB_FILE_PATH}"
     ## remove temporary cron.d file
     /usr/bin/rm /tmp/"${BACKUP_CRONJOB_FILE_NAME}"
+    # Set persmissions
+    ## Give execution rights on the cron job
+    /usr/bin/chmod 0644 "${BACKUP_CRONJOB_FILE_PATH}"
+    ## Give execution rights on the cron job
+    /usr/bin/chown "${CONTAINER_GID}":"${CONTAINER_GID}" "${BACKUP_CRONJOB_FILE_PATH}"
 
     # Start cron (in background)
     /usr/sbin/cron &
