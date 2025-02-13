@@ -1,0 +1,5 @@
+# EVERY HOUR:   PATH OF SCRIPT:     SOURCE (which should backuped):     TARGET (copy to this location):     LOG FILE PATH:  BACKUP ARCHIVE TIME (optional:
+0 * * * * BACKUP_SCRIPT BACKUP_SOURCE BACKUP_TARGET BACKUP_LOGFILE BACKUP_ARCHIVE_TIME_DAYS
+
+## TODO:
+# Add Update gameserver feature in running container (no stop start container is needed anymore

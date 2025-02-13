@@ -1,10 +1,19 @@
-# Enshrouded 0.1.0
+# Enshrouded 0.1.1
 Enshrouded Gameserver
+
+## CHANGELOG
+### 0.1.1
+* Add Backup Feature
+### 0.1.0
+* create docker image 
 
 ## Link
 * [Enshrouded Docker](https://github.com/jsknnr/enshrouded-server)
 * [Enable voice and chat:](https://steamcommunity.com/sharedfiles/filedetails/?id=3417090067)
 * [Recommended Server Specifications ](https://enshrouded.zendesk.com/hc/en-us/articles/16055628734109-Recommended-Server-Specifications)
+
+## TODO:
+* Add Update gameserver feature in running container (no stop start container is needed anymore)
 
 ### Build & Deployment
 
@@ -19,13 +28,13 @@ Enshrouded Gameserver
 #### Build All Images & Deploy
     # Clone git repo
     repo="enshrouded"
-    version="0.1.0"
+    version="0.1.1"
     cd /opt
     rm -rf /opt/${repo}
     git clone https://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@github.com/gameix/${repo}.git
     cd /opt/${repo}
     # Checkout Branch
-    git checkout main
+    git checkout backup-feature
     git branch -a
 
     # Remove existing all containers
@@ -39,7 +48,37 @@ Enshrouded Gameserver
 
     # Remove existing volume
     docker volume rm -f enshrouded_gameix-enshrouded-persistent-data
+    docker volume rm -f enshrouded_gameix-enshrouded-persistent-savegame
+    docker volume rm -f enshrouded_gameix-enshrouded-persistent-backup
     sync
+
+    # Build & Deploy 
+    docker-compose up -d 
+    cd /opt
+    
+    # Show logs
+    docker logs -f gameix-enshrouded-gameserver
+
+### Run/Update (with docker-compose no gameserver data will be lost)
+    # Clone git repo
+    repo="enshrouded"
+    version="0.1.1"
+    cd /opt
+    rm -rf /opt/${repo}
+    git clone https://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@github.com/gameix/${repo}.git
+    cd /opt/${repo}
+    # Checkout Branch
+    git checkout backup-feature
+    git branch -a
+
+    # Remove existing all containers
+    docker rm -f gameix-enshrouded-gameserver
+
+    # Remove current devloping image
+    docker rmi -f gameix-enshrouded-gameserver:${version}
+    
+    # Remove all old docker images etc.
+    docker system prune -af --volumes
 
     # Build & Deploy 
     docker-compose up -d
@@ -47,7 +86,6 @@ Enshrouded Gameserver
     
     # Show logs
     docker logs -f gameix-enshrouded-gameserver
-
 
 ### Run (without docker-compose)
     docker volume create enshrouded-persistent-data
@@ -105,3 +143,14 @@ Enshrouded Gameserver
 ## BUGS
     # Error in entrypoint.sh line 98
         -> jq: error (at /home/steam/enshrouded/enshrouded_server.json:60): string ("true") cannot be parsed as a number
+    # Update image:
+        -> /home/steam/entrypoint.sh will not updated with new !!
+        --> WORKAROUND: remove enshrouded_gameix-enshrouded-persistent-data docker volume
+        ---> SOLUTION: this file should not be in /home/steam folder 
+
+# The Virtualbox Appliance
+    Idea: 
+    ich hoste den gameserver auf meinem PC (da super CPU und 1gbit up link) in einer virtual VM (eine appliance, kann auch für VMWAre oder anderne Hypervisors) wo linux und der gameserver läuft wo sich die läute dann connecten können.
+    Eine einfache lösung um schnell den gameserver von hetzer zb. welcher immer läuft aber nur mit wenigern spielern. Und keinen Hoster verwenden zu müssen.
+    Man könnte auch filesyc in spiel nehmen um z.b. die dataen auf den main gamerserver immer abzugleichen (world speicher stände)....
+

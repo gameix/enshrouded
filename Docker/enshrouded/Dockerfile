@@ -1,5 +1,5 @@
 # ====================================================================================================================
-# FORKED BY: https://github.com/jsknnr/enshrouded-server/blob/main/container/proton/Dockerfile
+# VERSION: 0.1.1
 # ====================================================================================================================
 
 # Base image
@@ -34,6 +34,14 @@ ENV STEAM_SDK32_PATH="/home/steam/.steam/sdk32"
 ENV STEAM_COMPAT_CLIENT_INSTALL_PATH="$STEAMCMD_PATH"
 ENV STEAM_COMPAT_DATA_PATH="${STEAMCMD_PATH}/steamapps/compatdata/${STEAM_APP_ID}"
 ENV UMU_ID=0
+# BACKUP VARIABLES
+ENV BACKUP_SCRIPT="/backup.sh"
+ENV BACKUP_CRONJOB_FILE_NAME="enshouded-cron"
+ENV BACKUP_CRONJOB_FILE_PATH="/etc/cron.d/$BACKUP_CRONJOB_FILE_NAME"
+ENV BACKUP_SOURCE="$ENSHROUDED_PATH/savegame"
+ENV BACKUP_TARGET="${ENSHROUDED_PATH}/backup"
+ENV BACKUP_LOGFILE="$ENSHROUDED_PATH/logs/enshrouded_server.log"
+
 
 RUN groupadd -g $CONTAINER_GID steam \
     && useradd -g $CONTAINER_GID -u $CONTAINER_UID -m steam \
@@ -49,6 +57,8 @@ RUN groupadd -g $CONTAINER_GID steam \
         jq \
         locales \
         lib32gcc-s1 \
+        cron \
+        vim \
     && echo 'LANG="en_US.UTF-8"' > /etc/default/locale \
     && echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
     && locale-gen \
@@ -58,17 +68,31 @@ RUN groupadd -g $CONTAINER_GID steam \
     && apt-get clean \
     && apt-get autoremove -y
 
-# Copy Entrypoint
-COPY scripts/entrypoint.sh /home/steam/entrypoint.sh
+# Copy Entrypoint (all scipts must be in root, else will not update if the data volume was not removed = upgrade procedure)
+COPY scripts/entrypoint.sh /entrypoint.sh
 # Set permission
-RUN chmod +x /home/steam/entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
+
+# BACKUP FEATURE
+## Copy enshouded-cron file to the cron.d directory
+COPY config/enshouded-cron $BACKUP_CRONJOB_FILE_PATH
+## Give execution rights on the cron job
+RUN chmod 0644 $BACKUP_CRONJOB_FILE_PATH
+## Give execution rights on the cron job
+RUN chown $CONTAINER_GID:$CONTAINER_GID $BACKUP_CRONJOB_FILE_PATH
+# Give the necessary rights to the user to run the cron
+RUN crontab -u steam $BACKUP_CRONJOB_FILE_PATH && chmod u+s /usr/sbin/cron
+## Copy Backup script
+COPY scripts/backup.sh $BACKUP_SCRIPT
+RUN chmod +x $BACKUP_SCRIPT
 
 
 USER steam
 
 RUN mkdir "$ENSHROUDED_PATH" \
-    && mkdir -p "${ENSHROUDED_PATH}/savegame" \
+    && mkdir -p "${BACKUP_SOURCE}" \
+    && mkdir -p "${BACKUP_TARGET}" \
     && mkdir -p "${STEAMCMD_PATH}/compatibilitytools.d" \
     && mkdir -p "${STEAMCMD_PATH}/steamapps/compatdata/${STEAM_APP_ID}" \
     && curl -sqL https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz | tar zxvf - -C ${STEAMCMD_PATH} \
@@ -83,8 +107,8 @@ RUN mkdir "$ENSHROUDED_PATH" \
 
 
 # Copy enshreouded config file
-COPY config/enshrouded_server_example.json /home/steam/enshrouded_server_example.json
+COPY config/enshrouded_server_example.json /enshrouded_server_example.json
 
 WORKDIR /home/steam
 
-CMD ["/home/steam/entrypoint.sh"]
+CMD ["/entrypoint.sh"]
