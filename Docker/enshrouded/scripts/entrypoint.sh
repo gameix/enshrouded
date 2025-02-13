@@ -23,6 +23,7 @@ function backup () {
     echo "[$(timestamp)] -- INFO: --> Backup Source: ${BACKUP_SOURCE}"
     echo "[$(timestamp)] -- INFO: --> Backup Target: ${BACKUP_TARGET}"
     echo "[$(timestamp)] -- INFO: --> Backup Log File: ${BACKUP_LOGFILE}"
+    echo "+---------------------------------------------------------------------------------------------------------------"
 
     # Adjust cron job file
     ## copy default cronjob file temporary to change (REASON: /usr/bin/sed: couldn't open temporary file /etc/cron.d/sedZ7K83k: Permission denied)
@@ -120,8 +121,6 @@ if [ -z "${BACKUP_ARCHIVE_TIME_DAYS}" ]; then
   else
     echo "[$(timestamp)] -- INFO: BACKUP_ARCHIVE_TIME_DAYS Variable is set: '${BACKUP_ARCHIVE_TIME_DAYS}'"
 fi
-
-
 echo "+---------------------------------------------------------------------------------------------------------------"
 
 # Setup Backup

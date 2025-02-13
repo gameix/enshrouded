@@ -1,5 +1,2 @@
-# EVERY HOUR:  PATH OF SCRIPT:     SOURCE (which should backuped):  TARGET (copy to this location):  LOG FILE PATH:                  BACKUP_ARCHIVE_TIME:   BACKUP_ARCHIVE_UNIT:
-0 * * * * /backup.sh /home/steam/enshrouded/savegame /home/steam/enshrouded/backup /home/steam/enshrouded/logs/enshrouded_server.log
-
-# TEST
-* * * * * BACKUP_SCRIPT BACKUP_SOURCE BACKUP_TARGET BACKUP_LOGFILE
+# EVERY HOUR:   PATH OF SCRIPT:     SOURCE (which should backuped):     TARGET (copy to this location):     LOG FILE PATH:
+0 * * * * BACKUP_SCRIPT BACKUP_SOURCE BACKUP_TARGET BACKUP_LOGFILE
