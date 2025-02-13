@@ -43,7 +43,6 @@ function create_backup() {
   ${CMD_ECHO} "[$(timestamp)] -- BACKUP: -> SOURCE: '${SOURCE}'" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
   ${CMD_ECHO} "[$(timestamp)] -- BACKUP: -> TARGET: '${TARGET}'" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
   ${CMD_ECHO} "[$(timestamp)] -- BACKUP: -> BACKUP_LOG_FILE: '${BACKUP_LOG_FILE}'" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
-  ${CMD_ECHO} "[$(timestamp)] -- BACKUP: -> BACKUP_ARCHIVE_TIME_DAYS: '${BACKUP_ARCHIVE_TIME_DAYS}' days" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
 
   # If SOURCE not empty create a backup
   if [ -z "$( ${CMD_LS} -A "${SOURCE}" )" ]; then

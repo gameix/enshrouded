@@ -23,6 +23,7 @@ function backup () {
     echo "[$(timestamp)] -- INFO: --> Backup Source: ${BACKUP_SOURCE}"
     echo "[$(timestamp)] -- INFO: --> Backup Target: ${BACKUP_TARGET}"
     echo "[$(timestamp)] -- INFO: --> Backup Log File: ${BACKUP_LOGFILE}"
+    echo "[$(timestamp)] -- INFO: --> Backup Archive Days: ${BACKUP_ARCHIVE_TIME_DAYS}"
     echo "+---------------------------------------------------------------------------------------------------------------"
 
     # Adjust cron job file
