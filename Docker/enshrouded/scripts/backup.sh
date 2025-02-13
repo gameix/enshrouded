@@ -16,9 +16,9 @@ CMD_LS="/usr/bin/ls"
 CMD_DU="/usr/bin/du"
 CMD_TEE="/usr/bin/tee"
 
-# Quick function to generate a timestamp
+# generate a timestamp
 timestamp () {
-  ${CMD_DATE} +"%Y-%m-%d %H:%M:%S,%3N"
+  ${CMD_DATE} +"%Y-%m-%d %H:%M:%s"
 }
 
 # get size of folder
@@ -31,13 +31,13 @@ function remove_backup_files(){
   echo "remove backupnfiles older then N Days"
 }
 
-
 function create_backup() {
   ${CMD_ECHO} "[$(timestamp)] -- BACKUP: Start Backup" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
   ${CMD_ECHO} "[$(timestamp)] -- BACKUP: -> SOURCE: '${SOURCE}'" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
   ${CMD_ECHO} "[$(timestamp)] -- BACKUP: -> TARGET: '${TARGET}'" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
   ${CMD_ECHO} "[$(timestamp)] -- BACKUP: -> BACKUP_LOG_FILE: '${BACKUP_LOG_FILE}'" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
 
+  # If SOURCE not empty create a backup
   if [ -z "$( ${CMD_LS} -A "${SOURCE}" )" ]; then
      ${CMD_ECHO} "[$(timestamp)] -- BACKUP: --> SOURCE is empty skip backup" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
   else
