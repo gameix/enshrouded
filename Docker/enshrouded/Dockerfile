@@ -34,6 +34,7 @@ ENV STEAM_SDK32_PATH="/home/steam/.steam/sdk32"
 ENV STEAM_COMPAT_CLIENT_INSTALL_PATH="$STEAMCMD_PATH"
 ENV STEAM_COMPAT_DATA_PATH="${STEAMCMD_PATH}/steamapps/compatdata/${STEAM_APP_ID}"
 ENV UMU_ID=0
+# BACKUP VARIABLES
 ENV BACKUP_SCRIPT="/backup.sh"
 ENV BACKUP_CRONJOB_FILE_NAME="enshouded-cron"
 ENV BACKUP_CRONJOB_FILE_PATH="/etc/cron.d/$BACKUP_CRONJOB_FILE_NAME"
@@ -77,7 +78,7 @@ COPY config/enshouded-cron $BACKUP_CRONJOB_FILE_PATH
 ## Give execution rights on the cron job
 RUN chmod 0644 $BACKUP_CRONJOB_FILE_PATH
 ## Give execution rights on the cron job
-RUN chown $CONTAINER_GID:$CONTAINER_GID BACKUP_CRONJOB_FILE_PATH
+RUN chown $CONTAINER_GID:$CONTAINER_GID $BACKUP_CRONJOB_FILE_PATH
 # Give the necessary rights to the user to run the cron
 RUN crontab -u steam $BACKUP_CRONJOB_FILE_PATH && chmod u+s /usr/sbin/cron
 ## Copy Backup script
