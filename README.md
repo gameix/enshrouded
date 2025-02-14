@@ -1,8 +1,10 @@
-# Enshrouded 0.1.1
+# Enshrouded 0.1.2
 Enshrouded Gameserver
 
 ## CHANGELOG
-### 0.1.1
+### 0.1.2
+* Remove Backup Files
+* ### 0.1.1
 * Add Backup Feature
 ### 0.1.0
 * create docker image 
@@ -29,13 +31,13 @@ Enshrouded Gameserver
 #### Build All Images & Deploy
     # Clone git repo
     repo="enshrouded"
-    version="0.1.1"
+    version="0.1.2"
     cd /opt
     rm -rf /opt/${repo}
     git clone https://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@github.com/gameix/${repo}.git
     cd /opt/${repo}
     # Checkout Branch
-    git checkout main
+    git checkout remove-backup-files
     git branch -a
 
     # Remove existing all containers
@@ -63,13 +65,13 @@ Enshrouded Gameserver
 ### Run/Update (with docker-compose no gameserver data will be lost)
     # Clone git repo
     repo="enshrouded"
-    version="0.1.1"
+    version="0.1.2"
     cd /opt
     rm -rf /opt/${repo}
     git clone https://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@github.com/gameix/${repo}.git
     cd /opt/${repo}
     # Checkout Branch
-    git checkout main
+    git checkout remove-backup-files
     git branch -a
 
     # Remove existing all containers
