@@ -16,17 +16,17 @@ CMD_LS="/usr/bin/ls"
 CMD_DU="/usr/bin/du"
 CMD_TEE="/usr/bin/tee"
 
-# generate a timestamp
+# Generate a timestamp
 timestamp () {
-  ${CMD_DATE} +"%Y-%m-%d %H:%M:%s"
+  ${CMD_DATE} +"%Y-%m-%d %H:%M:%S,%3N"
 }
 
-# get size of folder
+# Get size of folder
 function get_size() {
   ${CMD_DU} -h --max-depth=0 "${1}" | awk '{ print $1 }'
 }
 
-# remove backup files
+# Remove backup files
 function remove_backup_files(){
   if [ -z "${BACKUP_ARCHIVE_TIME_DAYS}" ]; then
     ${CMD_ECHO} "[$(timestamp)] -- BACKUP: WARN no BACKUP_ARCHIVE_TIME_DAYS given, exit to remove backup files" | ${CMD_TEE} -a "${BACKUP_ARCHIVE_TIME_DAYS}"
@@ -54,6 +54,7 @@ function create_backup() {
      ${CMD_CP} -a "${SOURCE}"/ "${TARGET}/${TARGET_DATE}/"
      ${CMD_ECHO} "[$(timestamp)] -- BACKUP: Backup created (Size: $(get_size "${TARGET}"/"${TARGET_DATE}"))" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
      # Remove Backup Files
+     ${CMD_ECHO} "[$(timestamp)] -- BACKUP: Execute REMOVE BACKUP FILES"
      remove_backup_files
   fi
   ${CMD_ECHO} "--------------------------------------------------------------------------------------------------------------" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
