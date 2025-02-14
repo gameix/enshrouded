@@ -69,7 +69,7 @@ trap 'shutdown' TERM
 
 # Validate arguments
 echo "+------------------------+--------------------------------------------------------------------------------------"
-echo "| ENTRYPOINT: ${VERSION} |"
+echo "| ENTRYPOINT: ${VERSION}      |"
 echo "+------------------------+"
 if [ -z "$SERVER_NAME" ]; then
     SERVER_NAME='GAMEIX.NET Enshrouded Containerized'
