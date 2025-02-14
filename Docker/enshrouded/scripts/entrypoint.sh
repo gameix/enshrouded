@@ -1,30 +1,41 @@
 #!/bin/bash
 # ====================================================================================================================
-VERSION="0.1.1"
+VERSION="0.1.2"
 # ====================================================================================================================
 
-# Quick function to generate a timestamp
+# Generate a timestamp
 timestamp () {
   date +"%Y-%m-%d %H:%M:%S,%3N"
 }
 
+# Shutdown gameserver
 shutdown () {
     echo ""
     echo "$(timestamp) INFO: Recieved SIGTERM, shutting down gracefully"
     kill -2 $enshrouded_pid
 }
 
-function backup () {
+# Keep Container running (for testing)
+function keepContainerRunning () {
+  while :
+  do
+    sleeptime=3
+    echo "[$(timestamp)] -- INFO: Keep Container running...Press [CTRL+C], next run in ${sleeptime} seconds";	sleep ${sleeptime}
+  done
+}
+
+# Setup Backup Feature
+function setup_backup () {
   if [ "${ENABLE_BACKUP}" == "true" ]; then
     # Summary
-    echo "[$(timestamp)] -- INFO: SETUP BACKUP (Cron job):"
+    echo "+------------------------------------------------------------------------------------------------------------"
+    echo "[$(timestamp)] -- INFO: SETUP BACKUP:"
     echo "[$(timestamp)] -- INFO: -> Backup Script: ${BACKUP_SCRIPT}"
     echo "[$(timestamp)] -- INFO: -> Backup Cronjob: ${BACKUP_CRONJOB_FILE_PATH}"
     echo "[$(timestamp)] -- INFO: --> Backup Source: ${BACKUP_SOURCE}"
     echo "[$(timestamp)] -- INFO: --> Backup Target: ${BACKUP_TARGET}"
     echo "[$(timestamp)] -- INFO: --> Backup Log File: ${BACKUP_LOGFILE}"
     echo "[$(timestamp)] -- INFO: --> Backup Archive Days: ${BACKUP_ARCHIVE_TIME_DAYS}"
-    echo "+---------------------------------------------------------------------------------------------------------------"
 
     # Adjust cron job file
     ## copy default cronjob file temporary to change (REASON: /usr/bin/sed: couldn't open temporary file /etc/cron.d/sedZ7K83k: Permission denied)
@@ -50,16 +61,11 @@ function backup () {
 
     # Start cron (in background)
     /usr/sbin/cron &
-  fi
-}
 
-# Keep Container running
-function keepContainerRunning () {
-  while :
-  do
-    sleeptime=3
-    echo "ENSHROUDED: Keep Container running...Press [CTRL+C], next run in ${sleeptime} seconds";	sleep ${sleeptime}
-  done
+    # Summary
+    echo "[$(timestamp)] -- INFO: SETUP BACKUP: Done!"
+    echo "+------------------------------------------------------------------------------------------------------------"
+  fi
 }
 
 # Set our trap
@@ -67,7 +73,7 @@ trap 'shutdown' TERM
 
 # Validate arguments
 echo "+------------------------+--------------------------------------------------------------------------------------"
-echo "| VERSION: '${VERSION}'       |"
+echo "| ENTRYPOINT: ${VERSION}      |"
 echo "+------------------------+"
 if [ -z "$SERVER_NAME" ]; then
     SERVER_NAME='GAMEIX.NET Enshrouded Containerized'
@@ -132,8 +138,6 @@ if [ -z "${BACKUP_ARCHIVE_TIME_DAYS}" ]; then
 fi
 echo "+---------------------------------------------------------------------------------------------------------------"
 
-# Setup Backup
-backup
 
 # Install/Update Enshrouded
 echo "[$(timestamp)] -- INFO: Updating Enshrouded Dedicated Server"
@@ -217,6 +221,9 @@ while [ $timeout -lt 11 ]; do
     ((timeout++))
     echo "[$(timestamp)] -- INFO: Waiting for enshrouded_server.exe to be running"
 done
+
+# Setup Backup
+setup_backup
 
 # Hold us open until we recieve a SIGTERM by opening a job waiting for the process to finish then calling `wait`
 tail --pid=$enshrouded_pid -f /dev/null &
