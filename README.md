@@ -15,7 +15,6 @@ Enshrouded Gameserver
 * [Recommended Server Specifications ](https://enshrouded.zendesk.com/hc/en-us/articles/16055628734109-Recommended-Server-Specifications)
 
 ## TODO:
-* Remove Backup files not working probaly
 * Add Update gameserver feature in running container (no stop start container is needed anymore)
 
 ### Build & Deployment
