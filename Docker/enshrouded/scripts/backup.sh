@@ -53,6 +53,8 @@ function create_backup() {
      ${CMD_MKDIR} -p "${TARGET}"/"${TARGET_DATE}"
      ${CMD_CP} -a "${SOURCE}"/ "${TARGET}/${TARGET_DATE}/"
      ${CMD_ECHO} "[$(timestamp)] -- BACKUP: Backup created (Size: $(get_size "${TARGET}"/"${TARGET_DATE}"))" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
+     # Remove Backup Files
+     remove_backup_files
   fi
   ${CMD_ECHO} "--------------------------------------------------------------------------------------------------------------" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
 }
@@ -78,7 +80,7 @@ fi
 
 ## Execute ##
 create_backup
-remove_backup_files
+
 
 
 

@@ -40,17 +40,17 @@ Enshrouded Gameserver
     git checkout remove-backup-files
     git branch -a
 
-    # Remove existing all containers
-    docker rm -f gameix-enshrouded-gameserver
+    ## Remove existing all containers
+    #docker rm -f gameix-enshrouded-gameserver
 
-    # Remove current devloping image
-    docker rmi -f gameix-enshrouded-gameserver:${version}
-    
-    # Remove all old docker images etc.
-    docker system prune -af --volumes
+    ## Remove current devloping image
+    #docker rmi -f gameix-enshrouded-gameserver:${version}
+    #
+    ## Remove all old docker images etc.
+    #docker system prune -af --volumes
 
-    # Remove existing volume
-    docker volume rm -f enshrouded_gameix-enshrouded-persistent-data
+    ## Remove existing volume
+    #docker volume rm -f enshrouded_gameix-enshrouded-persistent-data
     #docker volume rm -f enshrouded_gameix-enshrouded-persistent-savegame
     #docker volume rm -f enshrouded_gameix-enshrouded-persistent-backup
     sync
