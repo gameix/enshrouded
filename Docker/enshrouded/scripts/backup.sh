@@ -39,6 +39,7 @@ function remove_backup_files(){
 }
 
 function create_backup() {
+  ${CMD_ECHO} "--------------------------------------------------------------------------------------------------------------" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
   ${CMD_ECHO} "[$(timestamp)] -- BACKUP: Start Backup" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
   ${CMD_ECHO} "[$(timestamp)] -- BACKUP: -> SOURCE: '${SOURCE}'" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
   ${CMD_ECHO} "[$(timestamp)] -- BACKUP: -> TARGET: '${TARGET}'" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"

@@ -28,15 +28,14 @@ function keepContainerRunning () {
 function setup_backup () {
   if [ "${ENABLE_BACKUP}" == "true" ]; then
     # Summary
-    echo "+---------------------------------------------------------------------------------------------------------------"
-    echo "[$(timestamp)] -- INFO: SETUP BACKUP (Cron job):"
+    echo "+------------------------------------------------------------------------------------------------------------"
+    echo "[$(timestamp)] -- INFO: SETUP BACKUP:"
     echo "[$(timestamp)] -- INFO: -> Backup Script: ${BACKUP_SCRIPT}"
     echo "[$(timestamp)] -- INFO: -> Backup Cronjob: ${BACKUP_CRONJOB_FILE_PATH}"
     echo "[$(timestamp)] -- INFO: --> Backup Source: ${BACKUP_SOURCE}"
     echo "[$(timestamp)] -- INFO: --> Backup Target: ${BACKUP_TARGET}"
     echo "[$(timestamp)] -- INFO: --> Backup Log File: ${BACKUP_LOGFILE}"
     echo "[$(timestamp)] -- INFO: --> Backup Archive Days: ${BACKUP_ARCHIVE_TIME_DAYS}"
-    echo "+---------------------------------------------------------------------------------------------------------------"
 
     # Adjust cron job file
     ## copy default cronjob file temporary to change (REASON: /usr/bin/sed: couldn't open temporary file /etc/cron.d/sedZ7K83k: Permission denied)
@@ -62,6 +61,10 @@ function setup_backup () {
 
     # Start cron (in background)
     /usr/sbin/cron &
+
+    # Summary
+    echo "[$(timestamp)] -- INFO: SETUP BACKUP: Done!"
+    echo "+------------------------------------------------------------------------------------------------------------"
   fi
 }
 
