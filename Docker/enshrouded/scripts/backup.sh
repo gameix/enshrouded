@@ -15,6 +15,9 @@ CMD_DATE="/usr/bin/date"
 CMD_LS="/usr/bin/ls"
 CMD_DU="/usr/bin/du"
 CMD_TEE="/usr/bin/tee"
+CMD_RM="/usr/bin/rm"
+CMD_FIND="/usr/bin/find"
+CMD_XARGS="/usr/bin/xargs"
 
 # Generate a timestamp
 timestamp () {
@@ -29,12 +32,11 @@ function get_size() {
 # Remove backup files
 function remove_backup_files(){
   if [ -z "${BACKUP_ARCHIVE_TIME_DAYS}" ]; then
-    ${CMD_ECHO} "[$(timestamp)] -- BACKUP: WARN no BACKUP_ARCHIVE_TIME_DAYS given, exit to remove backup files" | ${CMD_TEE} -a "${BACKUP_ARCHIVE_TIME_DAYS}"
+    ${CMD_ECHO} "[$(timestamp)] -- BACKUP: No BACKUP_ARCHIVE_TIME_DAYS was given, exit to remove backup files" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
     exit 1
   else
-    ${CMD_ECHO} "[$(timestamp)] -- BACKUP: INFO Remove backup files there are older then '${BACKUP_ARCHIVE_TIME_DAYS}' days" | ${CMD_TEE} -a "${BACKUP_ARCHIVE_TIME_DAYS}"
-    #/usr/bin/find "${TARGET}" -type d -mtime +"${BACKUP_ARCHIVE_TIME_DAYS}" -delete
-    /usr/bin/find "${TARGET}" -type d -mmin +"${BACKUP_ARCHIVE_TIME_DAYS}" -delete
+    ${CMD_ECHO} "[$(timestamp)] -- BACKUP: Remove backup files there are older then '${BACKUP_ARCHIVE_TIME_DAYS}' days" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
+    ${CMD_FIND} "${TARGET}" -mindepth 1 -maxdepth 1 -type d -mtime +"${BACKUP_ARCHIVE_TIME_DAYS}"| ${CMD_XARGS} ${CMD_RM} -rf
   fi
 }
 
@@ -55,7 +57,6 @@ function create_backup() {
      ${CMD_CP} -a "${SOURCE}"/ "${TARGET}/${TARGET_DATE}/"
      ${CMD_ECHO} "[$(timestamp)] -- BACKUP: Backup created (Size: $(get_size "${TARGET}"/"${TARGET_DATE}"))" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
      # Remove Backup Files
-     ${CMD_ECHO} "[$(timestamp)] -- BACKUP: Execute REMOVE BACKUP FILES"
      remove_backup_files
   fi
   ${CMD_ECHO} "--------------------------------------------------------------------------------------------------------------" | ${CMD_TEE} -a "${BACKUP_LOG_FILE}"
