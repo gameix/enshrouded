@@ -43,6 +43,8 @@ ENV BACKUP_TARGET="${ENSHROUDED_PATH}/backup"
 ENV BACKUP_LOGFILE="$ENSHROUDED_PATH/logs/enshrouded_server.log"
 
 
+######################################################################################################################
+# USER ROOT
 RUN groupadd -g $CONTAINER_GID steam \
     && useradd -g $CONTAINER_GID -u $CONTAINER_UID -m steam \
     && dpkg --add-architecture i386 \
@@ -67,29 +69,11 @@ RUN groupadd -g $CONTAINER_GID steam \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean \
     && apt-get autoremove -y
+######################################################################################################################
 
-# Copy Entrypoint (all scipts must be in root, else will not update if the data volume was not removed = upgrade procedure)
-COPY scripts/entrypoint.sh /entrypoint.sh
-# Set permission
-RUN chmod +x /entrypoint.sh
-
-
-# BACKUP FEATURE
-## Copy enshouded-cron file to the cron.d directory
-COPY config/enshouded-cron $BACKUP_CRONJOB_FILE_PATH
-## Give execution rights on the cron job
-RUN chmod 0644 $BACKUP_CRONJOB_FILE_PATH
-## Give execution rights on the cron job
-RUN chown $CONTAINER_GID:$CONTAINER_GID $BACKUP_CRONJOB_FILE_PATH
-# Give the necessary rights to the user to run the cron
-RUN crontab -u steam $BACKUP_CRONJOB_FILE_PATH && chmod u+s /usr/sbin/cron
-## Copy Backup script
-COPY scripts/backup.sh $BACKUP_SCRIPT
-RUN chmod +x $BACKUP_SCRIPT
-
-
+######################################################################################################################
+# USER STEAM
 USER steam
-
 RUN mkdir "$ENSHROUDED_PATH" \
     && mkdir -p "${BACKUP_SOURCE}" \
     && mkdir -p "${BACKUP_TARGET}" \
@@ -104,11 +88,37 @@ RUN mkdir "$ENSHROUDED_PATH" \
     && ln -s ${STEAMCMD_PATH}/linux32 ${STEAM_SDK32_PATH} \
     && ln -s ${STEAM_SDK32_PATH}/steamclient.so ${STEAM_SDK32_PATH}/steamservice.so \
     && curl -sqL "$GE_PROTON_URL" | tar zxvf - -C "${STEAMCMD_PATH}/compatibilitytools.d/"
+######################################################################################################################
 
+######################################################################################################################
+# USER ROOT
+USER root
+# ENTRYPOINT
+# Copy Entrypoint (all scipts must be in root, else will not update if the data volume was not removed = upgrade procedure)
+COPY scripts/entrypoint.sh /entrypoint.sh
+# Set permission
+RUN chmod +x /entrypoint.sh
+
+# BACKUP FEATURE
+## Copy enshouded-cron file to the cron.d directory
+COPY config/enshouded-cron $BACKUP_CRONJOB_FILE_PATH
+## Give execution rights on the cron job
+RUN chmod 0644 $BACKUP_CRONJOB_FILE_PATH
+## Give execution rights on the cron job
+RUN chown $CONTAINER_GID:$CONTAINER_GID $BACKUP_CRONJOB_FILE_PATH
+# Give the necessary rights to the user to run the cron
+RUN crontab -u steam $BACKUP_CRONJOB_FILE_PATH && chmod u+s /usr/sbin/cron
+## Copy Backup script
+COPY scripts/backup.sh $BACKUP_SCRIPT
+RUN chmod +x $BACKUP_SCRIPT
+######################################################################################################################
+
+######################################################################################################################
+# USER STEAM
+USER steam
 
 # Copy enshreouded config file
 COPY config/enshrouded_server_example.json /enshrouded_server_example.json
-
 WORKDIR /home/steam
-
 CMD ["/entrypoint.sh"]
+######################################################################################################################

@@ -41,11 +41,11 @@ Enshrouded Gameserver
     git branch -a
 
     ## Remove existing all containers
-    #docker rm -f gameix-enshrouded-gameserver
+    docker rm -f gameix-enshrouded-gameserver
 
     ## Remove current devloping image
-    #docker rmi -f gameix-enshrouded-gameserver:${version}
-    #
+    docker rmi -f gameix-enshrouded-gameserver:${version}
+    
     ## Remove all old docker images etc.
     #docker system prune -af --volumes
 
